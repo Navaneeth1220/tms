@@ -1,6 +1,6 @@
 package com.cg.tms;
 
-import com.cg.tms.manualTesting.PackageUI;
+import com.cg.tms.manualTesting.PackageImplManualTesting;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +15,7 @@ public class TripBookingBoot {
 	public static void main(String args[]) {
 
 		ConfigurableApplicationContext context = SpringApplication.run(TripBookingBoot.class, args);
-		PackageUI packageUI = context.getBean(PackageUI.class);
+		PackageImplManualTesting packageUI = context.getBean(PackageImplManualTesting.class);
 		packageUI.start();
 
 		Log.debug("i am logged using debug level");

@@ -1,4 +1,4 @@
-package com.cg.tms.ui;
+package com.cg.tms.manualTesting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +11,7 @@ import com.cg.tms.entities.Route;
 import com.cg.tms.service.IRouteService;
 
 @Component
-public class RouteUI {
+public class RouteImplManualTesting {
 
 	@Autowired
 	private IRouteService service;
