@@ -1,16 +1,18 @@
 package com.cg.tms;
 
-<<<<<<< HEAD
-=======
+
+
 import com.cg.tms.manualTesting.PackageImplManualTesting;
->>>>>>> shiv
+
+
+import com.cg.tms.manualTesting.CustomerServiceManualTesting;
+import com.cg.tms.manualTesting.PackageUI;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-
-import com.cg.tms.manualTesting.BookingServiceImplManualTesting;
 
 @SpringBootApplication
 public class TripBookingBoot {
@@ -26,7 +28,14 @@ public class TripBookingBoot {
 		packageUI.start();
 
 		Log.debug("i am logged using debug level");
+		/*PackageUI packageUI = context.getBean(PackageUI.class);
+		packageUI.start();
+*/
+		CustomerServiceManualTesting customerserviceManualTesting =context.getBean(CustomerServiceManualTesting.class);
+		customerserviceManualTesting.start();
+	/*	Log.debug("i am logged using debug level");
 		Log.info("i am logged using info level");
 		Log.error("i am logged using error level");
+		*/
 	}
 }
