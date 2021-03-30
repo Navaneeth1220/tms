@@ -26,7 +26,14 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Autowired
     private IPackageRepository packageRepository;
-
+    /*
+	 * 
+	 * Adds a Customer to the database after validation
+	 * 
+	 * @param customer is Customer
+	 * @return saved Customer
+	 * 
+	 * */
     @Override
     public Customer addCustomer(Customer customer) {
         validateCustomer(customer);
@@ -34,6 +41,14 @@ public class CustomerServiceImpl implements ICustomerService {
         return customer;
     }
 
+    /*
+	 * 
+	 * Update  a Customer from the database after validation based on CustomerId
+	 * 
+	 * @param customer is customerId
+	 * @return updated Customer
+	 * 
+	 * */
     @Override
     public Customer updateCustomer(Customer customer) throws CustomerNotFoundException {
         validateCustomer(customer);
@@ -44,6 +59,14 @@ public class CustomerServiceImpl implements ICustomerService {
         customerRepository.save(customer);
         return customer;
     }
+    /*
+	 * 
+	 * Deletes a Customer from the database after validation based on customer
+	 * 
+	 * @param customer is customer
+	 * @return deleted Customer
+	 * 
+	 * */
 
     @Override
     public Customer deleteCustomer(Customer customer) throws CustomerNotFoundException {
@@ -51,7 +74,14 @@ public class CustomerServiceImpl implements ICustomerService {
         customerRepository.delete(customer);
         return customer;
     }
-
+    /*
+	 * 
+	 * Searches a Customer from the database after validation based on custId
+	 * 
+	 * @param custId is Customer Id
+	 * @return searched Customer
+	 * 
+	 * */
 
     @Override
     public Customer viewCustomer(int custid) throws CustomerNotFoundException {
@@ -62,6 +92,14 @@ public class CustomerServiceImpl implements ICustomerService {
         return optional.get();
     }
 
+    /*
+	 * 
+	 * Searches a Customer from the database after validation based on packageId
+	 * 
+	 * @param packageId is Package Id
+	 * @return searched CustomerList
+	 * 
+	 * */
     @Override
     public List<Customer> viewAllCustomers(int packageId) throws PackageNotFoundException {
         Optional<Package> optionalpack = packageRepository.findById(packageId);
@@ -72,7 +110,14 @@ public class CustomerServiceImpl implements ICustomerService {
         List<Customer> customer = customerRepository.findByPack(pack);
         return customer;
     }
-
+    /*
+	 * 
+	 * Searches a Customer from the database after validation based on routeId
+	 * 
+	 * @param routeId is Route Id
+	 * @return searched CustomerList
+	 * 
+	 * */
     @Override
     public List<Customer> viewCustomerList(String routeId) throws RouteNotFoundException {
         Optional<Route> optionalroute = routeRepository.findById(routeId);
@@ -84,15 +129,29 @@ public class CustomerServiceImpl implements ICustomerService {
         return customer;
     }
 
-
+    /*
+	 * 
+	 * Validates customer in Customer
+	 * 
+	 * @param customer is a data member of Customer
+	 * @return void
+	 * 
+	 * */
     void validateCustomer(Customer customer) {
         if (customer == null) {
-            throw new InvalidCustomerException("packageName can't be null or empty");
+            throw new InvalidCustomerException("customerName can't be null or empty");
         }
         validateCustomerAddress(customer.getAddress());
         validateCustomerName(customer.getCustomerName());
     }
-
+    /*
+	 * 
+	 * Validates Customer Address in Customer
+	 * 
+	 * @param address is a data member of Customer
+	 * @return void
+	 * 
+	 * */
     void validateCustomerAddress(String address) {
         if (address == null || address.isEmpty() || address.trim().isEmpty()) {
 
@@ -100,7 +159,14 @@ public class CustomerServiceImpl implements ICustomerService {
         }
 
     }
-
+    /*
+	 * 
+	 * Validates Customer Name in Customer
+	 * 
+	 * @param customerName is a data member of Customer
+	 * @return void
+	 * 
+	 * */
     void validateCustomerName(String customerName) {
         if (customerName == null || customerName.isEmpty() || customerName.trim().isEmpty()) {
 

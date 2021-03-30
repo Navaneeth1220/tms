@@ -19,7 +19,7 @@ import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.cg.tms.exceptions.InvalidCustomerIdException;
+import com.cg.tms.exceptions.*;
 import com.cg.tms.repository.ICustomerRepository;
 import com.cg.tms.repository.IPackageRepository;
 import com.cg.tms.repository.IRouteRepository;
@@ -68,45 +68,44 @@ public class CustomerServiceImplUnitTesting {
 
 
 	/*
-	 * testValidateCustomerId_1 fail case scenario
+	 * fail case scenario
+	 * testValidateCustomerName 
 	 */
 	@Test
-	public void testValidateCustomerId_1() {
+	public void testValidateCustomerName_1() {
 
 		String CustomerName = "";
 		Executable executable = () -> service.validateCustomerName(CustomerName);
-		Assertions.assertThrows(InvalidCustomerIdException.class, executable);
+		Assertions.assertThrows(InvalidCustomerException.class, executable);
 
 	}
 
 	/*
-	 * testValidateCustomer Success Scenario
+	 * Success Scenario
+	 * testValidateCustomerName 
 	 */
 	@Test
-	public void testValidateCustomerId_2() {
+	public void testValidateCustomerName_2() {
 
 		String CustomerName = "Mohan";
 		service.validateCustomerName(CustomerName);
 	}
 
 	/*
-	 * Success Scenario Testing updationOfCustomer
+	 * Scenario 2: Testing updationOfCustomer
+	 * Success Scenario 
 	 * 
 	 */
 	@Test
 	public void testUpdateCustomer() {
-		int CustomerId = 1;
-		String customername = "msp";
+		int customerId = 1;
+		String customername = "Mohan";
 		String customeraddress = "chennai";
 		String customerpassword = "Msp23";
 		Customer customer = mock(Customer.class);
-		when(customer.getCustomerId()).thenReturn(CustomerId);
-		when(customer.getCustomerName()).thenReturn(customername);
-		when(customer.getCustomerPassword()).thenReturn(customerpassword);
-		when(customer.getAddress()).thenReturn(customeraddress);
 		Optional<Customer> optional = Optional.of(customer);
-		when(customerRepository.findById(CustomerId)).thenReturn(optional);
-		doNothing().when(service).validateCustomerName(customername);
+		doNothing().when(service).validateCustomer(customer);
+		when(customerRepository.existsById(customer.getCustomerId())).thenReturn(true);
 		when(customerRepository.save(customer)).thenReturn(customer);
 		Customer result = service.updateCustomer(customer);
 		Assertions.assertNotNull(result);
@@ -115,7 +114,9 @@ public class CustomerServiceImplUnitTesting {
 	}
 
 	/*
-	 * View customer List with same route ID
+	 *Scenario 3: Getting a list of customers with same route ID
+	 *Success scenario
+	 *
 	 */
 	@Test
 	public void testViewCustomerList() {
@@ -137,7 +138,8 @@ public class CustomerServiceImplUnitTesting {
 		
 	}
 	/*
-	 * List of customers with the same package id
+	 * Scenerio 4 :getting a list of customers with same package Id
+	 * success scenerio
 	 */
 	@Test
 	public void testViewCustomerList_2() {

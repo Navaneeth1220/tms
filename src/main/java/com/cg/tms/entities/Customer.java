@@ -1,5 +1,7 @@
 package com.cg.tms.entities;
 
+import java.util.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -77,5 +79,24 @@ public class Customer {
     public void setEmail(String email) {
         this.email = email;
     }
+    @Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer)obj;
+		if (customerId != other.customerId)
+			return false;
+		return true;
+    }
+    @Override
+	public int hashCode() {
+
+		return Objects.hash(customerId);
+	}
+    
 
 }
