@@ -6,6 +6,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Travels {
+
 	@Id
 	private int travelsId;
 	private String travelsName;

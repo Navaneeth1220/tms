@@ -10,16 +10,12 @@ import javax.persistence.Id;
 public class PaymentDetails {
 
 	@Id
-	@Column(unique = true)
 	private int paymentId;
 	private String paymentMode;
 	private String bankName;
-	@Column(unique = true)
 	private long cardNo;
-	@Column(unique = true)
 	private double netAmount;
 	private String paymentStatus;
-	@Column(unique = true)
 	private int userId;
 
 	public PaymentDetails() {

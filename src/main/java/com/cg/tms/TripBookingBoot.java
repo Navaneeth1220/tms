@@ -1,5 +1,9 @@
 package com.cg.tms;
 
+<<<<<<< HEAD
+=======
+import com.cg.tms.manualTesting.PackageImplManualTesting;
+>>>>>>> shiv
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +22,8 @@ public class TripBookingBoot {
 		ConfigurableApplicationContext context = SpringApplication.run(TripBookingBoot.class, args);
 		BookingServiceImplManualTesting book = context.getBean(BookingServiceImplManualTesting.class);
 		book.start();
+		PackageImplManualTesting packageUI = context.getBean(PackageImplManualTesting.class);
+		packageUI.start();
 
 		Log.debug("i am logged using debug level");
 		Log.info("i am logged using info level");

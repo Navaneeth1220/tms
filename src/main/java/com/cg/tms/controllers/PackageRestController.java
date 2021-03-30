@@ -47,8 +47,8 @@ public class PackageRestController {
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)
-	@PostMapping("/addPackage")
-	public String addPackage(@RequestBody CreatePackageRequest requestData) {
+	@PostMapping("/add")
+	public PackageDetails addPackage(@RequestBody CreatePackageRequest requestData) {
 
 		Package pack = new Package();
 		pack.setPackageName(requestData.getPackageName());
@@ -56,10 +56,11 @@ public class PackageRestController {
 		pack.setPackageType(requestData.getPackageType());
 		pack.setPackageCost(requestData.getPackageCost());
 		Package added = packageService.addPackage(pack);
-		return "added package with packageId =" + added.getPackageId();
+		PackageDetails response  = packageUtil.toDetailPackage(added);
+		return response;
 	}
 
-	@DeleteMapping("/deletePackage")
+	@DeleteMapping("/delete")
 	public String deletePackage(@RequestBody DeletePackageRequest requestData) {
 
 		packageService.deletePackage(requestData.getPackageId());

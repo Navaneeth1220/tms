@@ -14,7 +14,7 @@ public class CentralizedExceptionHandler {
 
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(PackageNotFoundException.class)
-	public String handleStudentNotFound(PackageNotFoundException e) {
+	public String handlePackageNotFound(PackageNotFoundException e) {
 
 		return e.getMessage();
 	}
