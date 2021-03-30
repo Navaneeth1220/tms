@@ -40,6 +40,9 @@ public class FeedbackImplManualTesting {
 			feed1.setRating(3);
 			feed1.setFeedback("Average,Needs Improvement");
 			
+		//	Customer customer=new Customer();
+	    //		feed1.setCustomer(customer);
+			
 			Feedback feeded1 = service.addFeedback(feed1);
 			display(feeded1);
 			
@@ -50,13 +53,12 @@ public class FeedbackImplManualTesting {
 			display(feeded2);
 			System.out.println("Feedbackid is 5");
 			
-	/*		Customer customer=new Customer();
-			feed1.setCustomer(customer);
+		
+		
+		//	Customer cust=service.findByCustomerId(feeded1.getCustomer().getCustomerId());
+		//	display(cust);
+		//	System.out.println("Customer is 2");
 			
-			Customer cust=service1.findByCustomerId(feed1.getCustomer().getCustomerId());
-			display(cust);
-			System.out.println("Customer is 2");
-			*/
 			
 			System.out.println("Display all Feedbacks");
 			List<Feedback> feedbacks = service.viewAllFeedbacks();
@@ -76,10 +78,10 @@ public class FeedbackImplManualTesting {
 				+ feeded.getFeedback() + " " + feeded.getSubmitDate());
 
 	}
-	void display(Customer cust) {
-		System.out.println( " "+ cust.getCustomerId());
+//	void display(Customer cust) {
+	//	System.out.println( " "+ cust.getCustomerId());
 
-	}
+//	}
 
 	void displayAll(Collection<Feedback> feedbacks) {
 		for (Feedback feed : feedbacks) {

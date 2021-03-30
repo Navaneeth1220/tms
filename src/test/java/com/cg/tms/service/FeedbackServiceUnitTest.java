@@ -116,8 +116,7 @@ public class FeedbackServiceUnitTest {
 	@Test
 	public void testFindByCustomerId_2() {
 		int customerId = 50;
-		Optional<Feedback> optional = Optional.empty();
-		when(feedbackRepository.findById(customerId)).thenReturn(optional);
+		when(customerService.viewCustomer(customerId)).thenReturn(null);
 		Executable executable = () -> feedbackService.findByCustomerId(customerId);
 		Assertions.assertThrows(CustomerNotFoundException.class, executable);
 	}
