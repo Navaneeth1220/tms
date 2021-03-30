@@ -26,9 +26,38 @@ public class PackageDetails {
 	private String paymentStatus;
 	private int userId;
 	private String ticketId;
-	@OneToOne
-	private Route route;
 	private String ticketStatus;
+
+	private String routeId;
+	private String routeFrom;
+	private String routeTo;
+
+	public String getRouteId() {
+
+		return routeId;
+	}
+
+	public void setRouteId(String routeId) {
+
+		this.routeId = routeId;
+	}
+
+	public String getRouteFrom() {
+
+		return routeFrom;
+	}
+
+	public void setRouteFrom(String routeFrom) {
+		this.routeFrom = routeFrom;
+	}
+
+	public String getRouteTo() {
+		return routeTo;
+	}
+
+	public void setRouteTo(String routeTo) {
+		this.routeTo = routeTo;
+	}
 
 	public int getPackageId() {
 
@@ -228,16 +257,6 @@ public class PackageDetails {
 	public void setTicketId(String ticketId) {
 
 		this.ticketId = ticketId;
-	}
-
-	public Route getRoute() {
-
-		return route;
-	}
-
-	public void setRoute(Route route) {
-
-		this.route = route;
 	}
 
 	public String getTicketStatus() {

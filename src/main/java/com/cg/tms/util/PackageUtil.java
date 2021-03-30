@@ -48,7 +48,9 @@ public class PackageUtil {
 		if (ticket != null) {
 
 			packageDetails.setTicketId(ticket.getTicketId());
-			packageDetails.setRoute(ticket.getRoute());
+			packageDetails.setRouteId(ticket.getRoute().getRouteId());
+			packageDetails.setRouteFrom(ticket.getRoute().getRouteFrom());
+			packageDetails.setRouteFrom(ticket.getRoute().getRouteTo());
 			packageDetails.setTicketStatus(ticket.getStatus());
 		}
 
@@ -57,7 +59,7 @@ public class PackageUtil {
 	}
 
 	public List<PackageDetails> toDetailsPackages(Collection<Package> packages) {
-		
+
 		List<PackageDetails> packs = new ArrayList<>();
 		for (Package pack : packages) {
 
