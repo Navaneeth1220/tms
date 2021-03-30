@@ -1,12 +1,12 @@
 package com.cg.tms.entities;
 
 import java.time.LocalDate;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -17,7 +17,7 @@ public class Route {
 	private String routeFrom;
 	private String routeTo;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	private List<Bus> buses;
 
 	private LocalDateTime departureTime;
