@@ -1,11 +1,12 @@
 package com.cg.tms;
 
-import com.cg.tms.manualTesting.PackageUI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+
+import com.cg.tms.manualTesting.FeedbackImplManualTesting;
 
 @SpringBootApplication
 public class TripBookingBoot {
@@ -15,9 +16,10 @@ public class TripBookingBoot {
 	public static void main(String args[]) {
 
 		ConfigurableApplicationContext context = SpringApplication.run(TripBookingBoot.class, args);
-		PackageUI packageUI = context.getBean(PackageUI.class);
-		packageUI.start();
-
+		/* PackageUI packageUI = context.getBean(PackageUI.class);
+		packageUI.start();*/
+		FeedbackImplManualTesting feedbackui=context.getBean(FeedbackImplManualTesting.class);
+		feedbackui.start();
 		Log.debug("i am logged using debug level");
 		Log.info("i am logged using info level");
 		Log.error("i am logged using error level");

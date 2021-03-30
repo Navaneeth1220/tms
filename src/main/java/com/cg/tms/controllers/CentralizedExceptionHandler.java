@@ -14,7 +14,7 @@ public class CentralizedExceptionHandler {
 
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(PackageNotFoundException.class)
-	public String handleStudentNotFound(PackageNotFoundException e) {
+	public String handleaPackageNotFound(PackageNotFoundException e) {
 
 		return e.getMessage();
 	}
@@ -46,7 +46,22 @@ public class CentralizedExceptionHandler {
 
 		return e.getMessage();
 	}
+	
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(FeedbackNotFoundException.class)
+	public String FeedbackNotFound(FeedbackNotFoundException e) {
 
+		return e.getMessage();
+	}
+
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(InvalidFeedbackException.class)
+	public String handleInvalidFeedbackException(InvalidFeedbackException e) {
+
+		return e.getMessage();
+	}
+	
+	
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
 	public String handleCatchAllException(Exception e) {
