@@ -1,4 +1,4 @@
-package com.cg.tms.ManualTesting;
+package com.cg.tms.manualTesting;
 
 import java.util.List;
 
