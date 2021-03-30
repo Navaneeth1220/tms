@@ -1,18 +1,15 @@
 package com.cg.tms.service;
 
-import com.cg.tms.entities.Booking;
-import com.cg.tms.entities.Travels;
-import com.cg.tms.exceptions.BookingNotFoundException;
-import com.cg.tms.exceptions.InvalidBookingException;
-import com.cg.tms.exceptions.InvalidIdException;
-import com.cg.tms.exceptions.InvalidTravelException;
-import com.cg.tms.exceptions.TravelsNotFoundException;
-import com.cg.tms.repository.ITravelsRespository;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import com.cg.tms.entities.Travels;
+import com.cg.tms.exceptions.InvalidTravelException;
+import com.cg.tms.exceptions.TravelsNotFoundException;
+import com.cg.tms.repository.ITravelsRespository;
 
 
 @Service
@@ -30,10 +27,25 @@ public class TravelServiceImpl implements ITravelsService{
 
     @Override
     public Travels updateTravels(Travels travels) throws TravelsNotFoundException {
-        return null;
+    	validateTravelsId(travels.getTravelsId());
+    		Optional<Travels> optional = repository.findById(travels.getTravelsId());
+    		if (!optional.isPresent()) {
+
+    			throw new TravelsNotFoundException("Travels not found for TravelId=" + travels.getTravelsId());
+
+    		}
+    		Travels saved=optional.get();
+    		return repository.save(saved);
+    		
+    	
     }
 
-    @Override
+    private void validateTravelsId(int travelsId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
     public Travels removeTravels(int travelsId) throws TravelsNotFoundException {
         Optional<Travels> optional = repository.findById(travelsId);
         if (!optional.isPresent()) {
