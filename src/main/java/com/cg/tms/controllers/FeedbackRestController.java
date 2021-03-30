@@ -27,8 +27,6 @@ public class FeedbackRestController {
 	@PostMapping("/add")
 	public FeedbackDetails addFeedback(@RequestBody AddFeedbackRequest requestData) {
 		Feedback feedback = new Feedback();
-
-		feedback.setFeedbackId(requestData.getFeedbackId());
 		feedback.setCustomer(requestData.getCustomer());
 		feedback.setFeedback(requestData.getFeedback());
 		feedback.setRating(requestData.getrating());
