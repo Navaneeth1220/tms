@@ -18,6 +18,11 @@ public class BookingServiceImpl implements IBookingService {
 	@Autowired
 	private IBookingRepository repo;
 
+	/**
+	 * scenario: to make a booking and save it in database
+	 * input : a Booking object and is validated is using validateBooking() method 
+	 * expectation : all values to be saved in the database
+	 */
 	@Override
 	public Booking makeBooking(Booking booking) {
 
@@ -25,6 +30,11 @@ public class BookingServiceImpl implements IBookingService {
 		return repo.save(booking);
 	}
 
+	/**
+	 * scenario : cancel booking using booking id
+	 * input : booking id of the booking made
+	 * expectation : the booking is cancelled and deleted from the database
+	 */
 	@Override
 	public Booking cancelBooking(int bookingId) throws BookingNotFoundException {
 		validateId(bookingId);
@@ -32,11 +42,17 @@ public class BookingServiceImpl implements IBookingService {
 		if (!optional.isPresent()) {
 			throw new BookingNotFoundException("Booking not found");
 		}
-		Booking fetched=optional.get();
+		Booking fetched = optional.get();
 		repo.delete(fetched);
 		return fetched;
 	}
-
+	
+	
+	/**
+	 * scenario : to view the current booking made
+	 * input : booking id of the booking made
+	 * expectation : the values of the booking are retrieved from database
+	 */
 	@Override
 	public Booking viewBooking(int bookingId) throws BookingNotFoundException {
 		Optional<Booking> optional = repo.findById(bookingId);
@@ -45,14 +61,18 @@ public class BookingServiceImpl implements IBookingService {
 		}
 		return optional.get();
 	}
-
+	
+	
+	/**
+	 * scenario : to view all the bookings
+	 * expectation : list of all bookings are fetched
+	 */
 	@Override
 	public List<Booking> viewAllBookings() {
 		List<Booking> bookings = repo.findAll();
 		return bookings;
 	}
-	
-	
+
 	void validateBooking(Booking booking) {
 		validateId(booking.getBookingId());
 		validateBookingType(booking.getBookingTitle());
