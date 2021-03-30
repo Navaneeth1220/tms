@@ -16,11 +16,70 @@ public class CustomerDetails {
 	private String address;
 	private String mobileNo;
 	private String email;
-	@ManyToOne
-	private Route route;
+	private String routeId;
+	private String routeFrom;
+	private String routeTo;
+	private int packageId;
+    private String packageName;
+    private String packageDescription;
+    private String packageType;
+    
+    
+	public String getRouteId() {
+		return routeId;
+	}
 
-	@ManyToOne
-	private Package pack;
+	public void setRouteId(String routeId) {
+		this.routeId = routeId;
+	}
+
+	public String getRouteFrom() {
+		return routeFrom;
+	}
+
+	public void setRouteFrom(String routeFrom) {
+		this.routeFrom = routeFrom;
+	}
+
+	public String getRouteTo() {
+		return routeTo;
+	}
+
+	public void setRouteTo(String routeTo) {
+		this.routeTo = routeTo;
+	}
+
+	public int getPackageId() {
+		return packageId;
+	}
+
+	public void setPackageId(int packageId) {
+		this.packageId = packageId;
+	}
+
+	public String getPackageName() {
+		return packageName;
+	}
+
+	public void setPackageName(String packageName) {
+		this.packageName = packageName;
+	}
+
+	public String getPackageDescription() {
+		return packageDescription;
+	}
+
+	public void setPackageDescription(String packageDescription) {
+		this.packageDescription = packageDescription;
+	}
+
+	public String getPackageType() {
+		return packageType;
+	}
+
+	public void setPackageType(String packageType) {
+		this.packageType = packageType;
+	}
 
 	public int getCustomerId() {
 		return customerId;
@@ -69,21 +128,4 @@ public class CustomerDetails {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public Route getRoute() {
-		return route;
-	}
-
-	public void setRoute(Route route) {
-		this.route = route;
-	}
-
-	public Package getPack() {
-		return pack;
-	}
-
-	public void setPack(Package pack) {
-		this.pack = pack;
-	}
-
 }

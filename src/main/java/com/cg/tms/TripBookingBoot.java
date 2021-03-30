@@ -21,8 +21,9 @@ public class TripBookingBoot {
 */
 		CustomerServiceManualTesting customerserviceManualTesting =context.getBean(CustomerServiceManualTesting.class);
 		customerserviceManualTesting.start();
-		Log.debug("i am logged using debug level");
+	/*	Log.debug("i am logged using debug level");
 		Log.info("i am logged using info level");
 		Log.error("i am logged using error level");
+		*/
 	}
 }

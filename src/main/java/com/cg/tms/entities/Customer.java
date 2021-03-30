@@ -24,7 +24,15 @@ public class Customer {
     @ManyToOne
     private Package pack;
 
-    public Route getRoute() {
+    public Package getPack() {
+		return pack;
+	}
+
+	public void setPack(Package pack) {
+		this.pack = pack;
+	}
+
+	public Route getRoute() {
         return route;
     }
 
