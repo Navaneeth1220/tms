@@ -21,12 +21,7 @@ public class PackageImplManualTesting {
 
 			System.out.println();
 			System.out.println("Adding a new Package: ");
-			Package pack1 = new Package();
-			pack1.setPackageName("Local");
-			pack1.setPackageDescription("diverse and cultural");
-			pack1.setPackageType("Normal");
-			pack1.setPackageCost(8500.0);
-
+			
 			Hotel hotel1 = new Hotel();
 			hotel1.setHotelId(177);
 			hotel1.setHotelName("Guhantara");
@@ -50,6 +45,16 @@ public class PackageImplManualTesting {
 			payment1.setNetAmount(1000000.0);
 			payment1.setPaymentStatus("Tranaction Complete");
 			payment1.setUserId(21);
+			
+			Package pack1 = new Package();
+			pack1.setPackageName("Local");
+			pack1.setPackageDescription("diverse and cultural");
+			pack1.setPackageType("Normal");
+			pack1.setPackageCost(8500.0);
+			//pack1.setHotel(hotel1);
+			//pack1.setTicket(ticket1);
+			//pack1.setPayment(payment1);
+
 
 			Package addPackage1 = packageService.addPackage(pack1);
 			displayPackage(addPackage1);
@@ -57,11 +62,7 @@ public class PackageImplManualTesting {
 			displayTicketDetails(ticket1);
 			displayPaymentDetails(payment1);
 
-			Package pack2 = new Package();
-			pack2.setPackageName("National");
-			pack2.setPackageDescription("challenging adventure");
-			pack2.setPackageType("Ultra");
-			pack2.setPackageCost(10500.0);
+			
 
 			Hotel hotel2 = new Hotel();
 			hotel2.setHotelId(277);
@@ -87,17 +88,21 @@ public class PackageImplManualTesting {
 			payment2.setPaymentStatus("Tranaction Processing");
 			payment2.setUserId(22);
 
+			Package pack2 = new Package();
+			pack2.setPackageName("National");
+			pack2.setPackageDescription("challenging adventure");
+			pack2.setPackageType("Ultra");
+			pack2.setPackageCost(10500.0);
+			//pack2.setHotel(hotel2);
+			//pack2.setTicket(ticket2);
+			//pack2.setPayment(payment2);
+			
 			Package addPackage2 = packageService.addPackage(pack2);
 			displayPackage(addPackage2);
 			displayHotel(hotel2);
 			displayTicketDetails(ticket2);
 			displayPaymentDetails(payment2);
 
-			Package pack3 = new Package();
-			pack3.setPackageName("Holiday");
-			pack3.setPackageDescription("peace and relaxation");
-			pack3.setPackageType("Deluxe");
-			pack3.setPackageCost(12500.0);
 
 			Hotel hotel3 = new Hotel();
 			hotel3.setHotelId(377);
@@ -122,6 +127,17 @@ public class PackageImplManualTesting {
 			payment3.setPaymentStatus("Tranaction Failed");
 			payment3.setUserId(27);
 
+
+			Package pack3 = new Package();
+			pack3.setPackageName("Holiday");
+			pack3.setPackageDescription("peace and relaxation");
+			pack3.setPackageType("Deluxe");
+			pack3.setPackageCost(12500.0);
+			//pack3.setHotel(hotel3);
+			//pack3.setTicket(ticket3);
+			//pack3.setPayment(payment3);
+			
+			
 			Package addPackage3 = packageService.addPackage(pack3);
 			displayPackage(addPackage3);
 			displayHotel(hotel3);

@@ -11,7 +11,6 @@ public class Feedback {
 	private int feedbackId;
 
 	@OneToOne
-	@Column(nullable = false)
 	private Customer customer;
 	private String feedback;
 	private int rating;
