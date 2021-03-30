@@ -11,7 +11,6 @@ import javax.persistence.OneToOne;
 public class TicketDetails {
 
 	@Id
-	@Column(unique=true)
 	private String ticketId;
 
 	@OneToOne

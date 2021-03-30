@@ -21,7 +21,7 @@ public class PackageImplManualTesting {
 
 			System.out.println();
 			System.out.println("Adding a new Package: ");
-			
+
 			Hotel hotel1 = new Hotel();
 			hotel1.setHotelId(177);
 			hotel1.setHotelName("Guhantara");
@@ -45,24 +45,21 @@ public class PackageImplManualTesting {
 			payment1.setNetAmount(1000000.0);
 			payment1.setPaymentStatus("Tranaction Complete");
 			payment1.setUserId(21);
-			
+
 			Package pack1 = new Package();
 			pack1.setPackageName("Local");
 			pack1.setPackageDescription("diverse and cultural");
 			pack1.setPackageType("Normal");
 			pack1.setPackageCost(8500.0);
-			//pack1.setHotel(hotel1);
-			//pack1.setTicket(ticket1);
-			//pack1.setPayment(payment1);
-
+			pack1.setHotel(hotel1);
+			pack1.setTicket(ticket1);
+			pack1.setPayment(payment1);
 
 			Package addPackage1 = packageService.addPackage(pack1);
 			displayPackage(addPackage1);
-			displayHotel(hotel1);
-			displayTicketDetails(ticket1);
-			displayPaymentDetails(payment1);
-
-			
+			// displayHotel(hotel1);
+			// displayTicketDetails(ticket1);
+			// displayPaymentDetails(payment1);
 
 			Hotel hotel2 = new Hotel();
 			hotel2.setHotelId(277);
@@ -93,16 +90,15 @@ public class PackageImplManualTesting {
 			pack2.setPackageDescription("challenging adventure");
 			pack2.setPackageType("Ultra");
 			pack2.setPackageCost(10500.0);
-			//pack2.setHotel(hotel2);
-			//pack2.setTicket(ticket2);
-			//pack2.setPayment(payment2);
-			
+			pack2.setHotel(hotel2);
+			pack2.setTicket(ticket2);
+			pack2.setPayment(payment2);
+
 			Package addPackage2 = packageService.addPackage(pack2);
 			displayPackage(addPackage2);
-			displayHotel(hotel2);
-			displayTicketDetails(ticket2);
-			displayPaymentDetails(payment2);
-
+			// displayHotel(hotel2);
+			// displayTicketDetails(ticket2);
+			// displayPaymentDetails(payment2);
 
 			Hotel hotel3 = new Hotel();
 			hotel3.setHotelId(377);
@@ -127,22 +123,20 @@ public class PackageImplManualTesting {
 			payment3.setPaymentStatus("Tranaction Failed");
 			payment3.setUserId(27);
 
-
 			Package pack3 = new Package();
 			pack3.setPackageName("Holiday");
 			pack3.setPackageDescription("peace and relaxation");
 			pack3.setPackageType("Deluxe");
 			pack3.setPackageCost(12500.0);
-			//pack3.setHotel(hotel3);
-			//pack3.setTicket(ticket3);
-			//pack3.setPayment(payment3);
-			
-			
+			pack3.setHotel(hotel3);
+			pack3.setTicket(ticket3);
+			pack3.setPayment(payment3);
+
 			Package addPackage3 = packageService.addPackage(pack3);
 			displayPackage(addPackage3);
-			displayHotel(hotel3);
-			displayTicketDetails(ticket3);
-			displayPaymentDetails(payment3);
+			// displayHotel(hotel3);
+			// displayTicketDetails(ticket3);
+			// displayPaymentDetails(payment3);
 
 			System.out.println();
 			System.out.println("Deleting a package: ");
@@ -197,32 +191,44 @@ public class PackageImplManualTesting {
 		System.out.println();
 		System.out.println("packageId: " + pack.getPackageId() + " packageName: " + pack.getPackageName()
 				+ " packageDescription: " + pack.getPackageDescription() + " packageType: " + pack.getPackageType()
-				+ " packageCost: " + pack.getPackageCost());
+				+ " packageCost: " + pack.getPackageCost() + "\nHotelId: " + pack.getHotel().getHotelId()
+				+ " HotelName: " + pack.getHotel().getHotelName() + " HotelDescription: "
+				+ pack.getHotel().getHotelDescription() + " HotelType: " + pack.getHotel().getHotelType()
+				+ " HotelAddress: " + pack.getHotel().getAddress() + " HotelRent: " + pack.getHotel().getRent()
+				+ " HotelStatus: " + pack.getHotel().getStatus() + "\nTicketId: " + pack.getTicket().getTicketId()
+				+ " Route: " + pack.getTicket().getRoute() + " TicketStatus: " + pack.getTicket().getStatus()
+				+ "\nPaymentId: " + pack.getPayment().getPaymentId() + " PaymentMode: "
+				+ pack.getPayment().getPaymentMode() + " Payment BankName: " + pack.getPayment().getBankName()
+				+ " Payment CardNumber: " + pack.getPayment().getCardNo() + " Payment NetAmount: "
+				+ pack.getPayment().getNetAmount() + " PaymentStatus: " + pack.getPayment().getPaymentStatus()
+				+ " Payment UserId: " + pack.getPayment().getUserId());
 
 	}
 
-	public void displayHotel(Hotel hotel) {
-
-		System.out.println(
-				"hotelId: " + hotel.getHotelId() + " hotelName: " + hotel.getHotelName() + " hotelDescription: "
-						+ hotel.getHotelDescription() + " hotelType: " + hotel.getHotelType() + " hotelAddress: "
-						+ hotel.getAddress() + " hotelRent: " + hotel.getRent() + " hotelStatus: " + hotel.getStatus());
-	}
-
-	public void displayTicketDetails(TicketDetails ticket) {
-
-		System.out.println("ticketId: " + ticket.getTicketId() + " route: " + ticket.getRoute() + " ticketStatus: "
-				+ ticket.getStatus());
-	}
-
-	public void displayPaymentDetails(PaymentDetails payment) {
-
-		System.out.println("paymentId: " + payment.getPaymentId() + " paymentMode: " + payment.getPaymentMode()
-				+ " paymentBankName: " + payment.getBankName() + " paymentCardNumber: " + payment.getCardNo()
-				+ " paymentNetAmount: " + payment.getNetAmount() + " paymentStatus: " + payment.getPaymentStatus()
-				+ " paymentUserId: " + payment.getUserId());
-
-	}
+	/*
+	 * public void displayHotel(Hotel hotel) {
+	 * 
+	 * System.out.println( "hotelId: " + hotel.getHotelId() + " hotelName: " +
+	 * hotel.getHotelName() + " hotelDescription: " + hotel.getHotelDescription() +
+	 * " hotelType: " + hotel.getHotelType() + " hotelAddress: " +
+	 * hotel.getAddress() + " hotelRent: " + hotel.getRent() + " hotelStatus: " +
+	 * hotel.getStatus()); }
+	 * 
+	 * public void displayTicketDetails(TicketDetails ticket) {
+	 * 
+	 * System.out.println("ticketId: " + ticket.getTicketId() + " route: " +
+	 * ticket.getRoute() + " ticketStatus: " + ticket.getStatus()); }
+	 * 
+	 * public void displayPaymentDetails(PaymentDetails payment) {
+	 * 
+	 * System.out.println("paymentId: " + payment.getPaymentId() + " paymentMode: "
+	 * + payment.getPaymentMode() + " paymentBankName: " + payment.getBankName() +
+	 * " paymentCardNumber: " + payment.getCardNo() + " paymentNetAmount: " +
+	 * payment.getNetAmount() + " paymentStatus: " + payment.getPaymentStatus() +
+	 * " paymentUserId: " + payment.getUserId());
+	 * 
+	 * }
+	 */
 
 	public void displayAllPackages(Collection<Package> packs) {
 
@@ -232,29 +238,26 @@ public class PackageImplManualTesting {
 		}
 	}
 
-	public void displayAllHotels(Collection<Hotel> hotels) {
-
-		for (Hotel hotel : hotels) {
-
-			displayHotel(hotel);
-		}
-	}
-
-	public void displayAllTicketDetails(Collection<TicketDetails> tickets) {
-
-		for (TicketDetails ticket : tickets) {
-
-			displayTicketDetails(ticket);
-		}
-	}
-
-	public void displayAllPaymentDetails(Collection<PaymentDetails> payments) {
-
-		for (PaymentDetails payment : payments) {
-
-			displayPaymentDetails(payment);
-		}
-
-	}
+	/*
+	 * public void displayAllHotels(Collection<Hotel> hotels) {
+	 * 
+	 * for (Hotel hotel : hotels) {
+	 * 
+	 * displayHotel(hotel); } }
+	 * 
+	 * public void displayAllTicketDetails(Collection<TicketDetails> tickets) {
+	 * 
+	 * for (TicketDetails ticket : tickets) {
+	 * 
+	 * displayTicketDetails(ticket); } }
+	 * 
+	 * public void displayAllPaymentDetails(Collection<PaymentDetails> payments) {
+	 * 
+	 * for (PaymentDetails payment : payments) {
+	 * 
+	 * displayPaymentDetails(payment); }
+	 * 
+	 * }
+	 */
 
 }
