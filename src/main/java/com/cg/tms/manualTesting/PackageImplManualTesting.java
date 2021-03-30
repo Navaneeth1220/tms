@@ -1,6 +1,7 @@
 package com.cg.tms.manualTesting;
 
 import java.util.*;
+import com.cg.tms.manualTesting.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,7 +35,6 @@ public class PackageImplManualTesting {
 
 			TicketDetails ticket1 = new TicketDetails();
 			ticket1.setTicketId("401254");
-			ticket1.setRoute(null);
 			ticket1.setStatus("Processing");
 
 			PaymentDetails payment1 = new PaymentDetails();
@@ -57,9 +57,6 @@ public class PackageImplManualTesting {
 
 			Package addPackage1 = packageService.addPackage(pack1);
 			displayPackage(addPackage1);
-			// displayHotel(hotel1);
-			// displayTicketDetails(ticket1);
-			// displayPaymentDetails(payment1);
 
 			Hotel hotel2 = new Hotel();
 			hotel2.setHotelId(277);
@@ -73,7 +70,7 @@ public class PackageImplManualTesting {
 
 			TicketDetails ticket2 = new TicketDetails();
 			ticket2.setTicketId("401255");
-			ticket2.setRoute(null);
+
 			ticket2.setStatus("Processing");
 
 			PaymentDetails payment2 = new PaymentDetails();
@@ -96,9 +93,6 @@ public class PackageImplManualTesting {
 
 			Package addPackage2 = packageService.addPackage(pack2);
 			displayPackage(addPackage2);
-			// displayHotel(hotel2);
-			// displayTicketDetails(ticket2);
-			// displayPaymentDetails(payment2);
 
 			Hotel hotel3 = new Hotel();
 			hotel3.setHotelId(377);
@@ -111,7 +105,6 @@ public class PackageImplManualTesting {
 
 			TicketDetails ticket3 = new TicketDetails();
 			ticket3.setTicketId("401256");
-			ticket3.setRoute(null);
 			ticket3.setStatus("Processing");
 
 			PaymentDetails payment3 = new PaymentDetails();
@@ -134,9 +127,6 @@ public class PackageImplManualTesting {
 
 			Package addPackage3 = packageService.addPackage(pack3);
 			displayPackage(addPackage3);
-			// displayHotel(hotel3);
-			// displayTicketDetails(ticket3);
-			// displayPaymentDetails(payment3);
 
 			System.out.println();
 			System.out.println("Deleting a package: ");
@@ -196,39 +186,13 @@ public class PackageImplManualTesting {
 				+ pack.getHotel().getHotelDescription() + " HotelType: " + pack.getHotel().getHotelType()
 				+ " HotelAddress: " + pack.getHotel().getAddress() + " HotelRent: " + pack.getHotel().getRent()
 				+ " HotelStatus: " + pack.getHotel().getStatus() + "\nTicketId: " + pack.getTicket().getTicketId()
-				+ " Route: " + pack.getTicket().getRoute() + " TicketStatus: " + pack.getTicket().getStatus()
-				+ "\nPaymentId: " + pack.getPayment().getPaymentId() + " PaymentMode: "
-				+ pack.getPayment().getPaymentMode() + " Payment BankName: " + pack.getPayment().getBankName()
-				+ " Payment CardNumber: " + pack.getPayment().getCardNo() + " Payment NetAmount: "
-				+ pack.getPayment().getNetAmount() + " PaymentStatus: " + pack.getPayment().getPaymentStatus()
-				+ " Payment UserId: " + pack.getPayment().getUserId());
+				+ " TicketStatus: " + pack.getTicket().getStatus() + "\nPaymentId: " + pack.getPayment().getPaymentId()
+				+ " PaymentMode: " + pack.getPayment().getPaymentMode() + " Payment BankName: "
+				+ pack.getPayment().getBankName() + " Payment CardNumber: " + pack.getPayment().getCardNo()
+				+ " Payment NetAmount: " + pack.getPayment().getNetAmount() + " PaymentStatus: "
+				+ pack.getPayment().getPaymentStatus() + " Payment UserId: " + pack.getPayment().getUserId());
 
 	}
-
-	/*
-	 * public void displayHotel(Hotel hotel) {
-	 * 
-	 * System.out.println( "hotelId: " + hotel.getHotelId() + " hotelName: " +
-	 * hotel.getHotelName() + " hotelDescription: " + hotel.getHotelDescription() +
-	 * " hotelType: " + hotel.getHotelType() + " hotelAddress: " +
-	 * hotel.getAddress() + " hotelRent: " + hotel.getRent() + " hotelStatus: " +
-	 * hotel.getStatus()); }
-	 * 
-	 * public void displayTicketDetails(TicketDetails ticket) {
-	 * 
-	 * System.out.println("ticketId: " + ticket.getTicketId() + " route: " +
-	 * ticket.getRoute() + " ticketStatus: " + ticket.getStatus()); }
-	 * 
-	 * public void displayPaymentDetails(PaymentDetails payment) {
-	 * 
-	 * System.out.println("paymentId: " + payment.getPaymentId() + " paymentMode: "
-	 * + payment.getPaymentMode() + " paymentBankName: " + payment.getBankName() +
-	 * " paymentCardNumber: " + payment.getCardNo() + " paymentNetAmount: " +
-	 * payment.getNetAmount() + " paymentStatus: " + payment.getPaymentStatus() +
-	 * " paymentUserId: " + payment.getUserId());
-	 * 
-	 * }
-	 */
 
 	public void displayAllPackages(Collection<Package> packs) {
 
@@ -237,27 +201,5 @@ public class PackageImplManualTesting {
 			displayPackage(pack);
 		}
 	}
-
-	/*
-	 * public void displayAllHotels(Collection<Hotel> hotels) {
-	 * 
-	 * for (Hotel hotel : hotels) {
-	 * 
-	 * displayHotel(hotel); } }
-	 * 
-	 * public void displayAllTicketDetails(Collection<TicketDetails> tickets) {
-	 * 
-	 * for (TicketDetails ticket : tickets) {
-	 * 
-	 * displayTicketDetails(ticket); } }
-	 * 
-	 * public void displayAllPaymentDetails(Collection<PaymentDetails> payments) {
-	 * 
-	 * for (PaymentDetails payment : payments) {
-	 * 
-	 * displayPaymentDetails(payment); }
-	 * 
-	 * }
-	 */
 
 }
