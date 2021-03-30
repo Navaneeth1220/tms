@@ -4,18 +4,9 @@ import com.cg.tms.entities.Customer;
 
 public class AddFeedbackRequest {
 
-	private int feedbackId;
 	private Customer customer;
 	private String feedback;
 	private int rating;
-
-	public int getFeedbackId() {
-		return feedbackId;
-	}
-
-	public void setFeedbackId(int feedbackId) {
-		this.feedbackId = feedbackId;
-	}
 
 	public Customer getCustomer() {
 		return customer;
