@@ -31,7 +31,6 @@ public class PackageRestController {
 
 	@GetMapping(value = "/byid/{id}")
 	public PackageDetails fetchPackage(@PathVariable("id") int packageId) {
-
 		LOG.debug("packageId in fetchpackage in PackageRestController " + packageId);
 		Package pack = packageService.searchPackage(packageId);
 		PackageDetails packageDetails = packageUtil.toDetailPackage(pack);

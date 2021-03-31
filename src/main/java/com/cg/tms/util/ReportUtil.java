@@ -23,14 +23,14 @@ public class ReportUtil {
 	}
 
 	public List<ReportDetails> toReportDetail(Collection<Report> reports) {
-		List<ReportDetails> reportss = new ArrayList<>();
+		List<ReportDetails> desired = new ArrayList<>();
 		for (Report report : reports) {
 
 			ReportDetails reportDetails = toReportDetail(report);
-			reportss.add(reportDetails);
+			desired.add(reportDetails);
 		}
 
-		return reportss;
+		return desired;
 
 	}
 }

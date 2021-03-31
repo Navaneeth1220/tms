@@ -1,8 +1,15 @@
 package com.cg.tms.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import com.cg.tms.entities.Package;
+import com.cg.tms.entities.PaymentDetails;
+import com.cg.tms.entities.TicketDetails;
+import com.cg.tms.repository.IPackageRepository;
+import com.cg.tms.repository.IPaymentDetailsRepository;
+import com.cg.tms.repository.ITicketDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +20,20 @@ import com.cg.tms.exceptions.InvalidIdException;
 import com.cg.tms.repository.IBookingRepository;
 
 @Service
-public class BookingServiceImpl implements IBookingService {
+public class BookingServiceImpl extends BaseService implements IBookingService {
 
 	@Autowired
 	private IBookingRepository repo;
+
+	@Autowired
+	private IPaymentDetailsRepository paymentRepository;
+
+	@Autowired
+	private ITicketDetailsRepository ticketRepository;
+
+	@Autowired
+	private IPackageRepository packageRepository;
+
 
 	/**
 	 * scenario: to make a booking and save it in database
@@ -25,10 +42,30 @@ public class BookingServiceImpl implements IBookingService {
 	 */
 	@Override
 	public Booking makeBooking(Booking booking) {
-
 		validateBooking(booking);
-		return repo.save(booking);
+		booking.setBookingDate(currentDate());
+
+        String ticketId=generateId();
+        TicketDetails ticket=booking.getTicket();
+        ticket.setStatus("reserved");
+        ticket.setTicketId(ticketId);
+
+        ticket = ticketRepository.save(ticket);
+        booking.setTicket(ticket);
+
+		PaymentDetails payment=booking.getPayment();
+		payment=paymentRepository.save(payment);
+        booking.setPayment(payment);
+      	return repo.save(booking);
 	}
+
+
+
+
+	public LocalDate currentDate(){
+		return LocalDate.now();
+	}
+
 
 	/**
 	 * scenario : cancel booking using booking id

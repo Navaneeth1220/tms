@@ -21,7 +21,7 @@ import com.cg.tms.service.IReportService;
 
 import com.cg.tms.util.ReportUtil;
 
-@RequestMapping("/report")
+@RequestMapping("/reports")
 @RestController
 public class ReportRestController {
 	@Autowired

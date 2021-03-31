@@ -10,11 +10,16 @@ import com.cg.tms.exceptions.CustomerNotFoundException;
 import com.cg.tms.exceptions.PackageNotFoundException;
 import com.cg.tms.exceptions.RouteNotFoundException;
 import com.cg.tms.entities.Package;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
-    List<Customer> findByRoute(Route route);
+   @Query("select booking.userId from Booking booking join booking.ticket tick  where tick.route=:route")
+    List<Integer> findByRoute(@Param("route")Route route);
 
-    List<Customer> findByPack(Package pack);
+    @Query("select booking.userId from Booking booking where pack=:pack")
+    List<Integer> findByPack(@Param("pack")Package pack);
+
 
 
 }
