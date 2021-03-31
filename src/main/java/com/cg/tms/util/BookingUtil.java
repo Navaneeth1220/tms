@@ -7,7 +7,10 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import com.cg.tms.dto.BookingDetails;
+import com.cg.tms.dto.getPackageRequest;
 import com.cg.tms.entities.Booking;
+import com.cg.tms.entities.Package;
+
 
 @Component
 public class BookingUtil {
@@ -31,6 +34,16 @@ public class BookingUtil {
 		}
 		
 		return books;
+	}
+	
+	public getPackageRequest toPackageDetails(Package pack) {
+		getPackageRequest pack1 = new getPackageRequest();
+		pack1.setPackageId(pack.getPackageId());
+		pack1.setPackageCost(pack.getPackageCost());
+		pack1.setPackageDescription(pack.getPackageDescription());
+		pack1.setPackageName(pack.getPackageName());
+		pack1.setPackageType(pack.getPackageType());
+		return pack1;
 	}
 	
 }

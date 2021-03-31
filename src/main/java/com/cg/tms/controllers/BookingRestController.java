@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.tms.dto.BookingDetails;
 import com.cg.tms.dto.CreateBookingRequest;
 import com.cg.tms.dto.DeleteBookingRequest;
+import com.cg.tms.dto.getPackageRequest;
 import com.cg.tms.entities.Booking;
+import com.cg.tms.entities.Package;
 import com.cg.tms.service.IBookingService;
 import com.cg.tms.util.BookingUtil;
 
@@ -25,8 +27,15 @@ public class BookingRestController {
 	@Autowired
 	private IBookingService service;
 	
+	
 	@Autowired
 	private BookingUtil util;
+	
+	/**
+	 * method to make a new booking 
+	 * @param requestData
+	 * @return details of the new booking made
+	 */
 	
 	@PostMapping("/add")
 	public BookingDetails makeBooking(@RequestBody CreateBookingRequest requestData) {
@@ -40,6 +49,12 @@ public class BookingRestController {
 		return details;
 	}
 	
+	/**
+	 * method to view booking fetched by the given id
+	 * @param id of the booking made
+	 * @return booking details of the given id
+	 */
+	
 	@GetMapping("/byid/{id}")
 	public BookingDetails findBooking(@PathVariable("id") int id) {
 		Booking book = service.viewBooking(id);
@@ -47,6 +62,10 @@ public class BookingRestController {
 		return fetched;
 	}
 	
+	/**
+	 * method to view details of all the bookings made
+	 * @return details of all the bookings made
+	 */	
 	@GetMapping
 	public List<BookingDetails> allBookings(){
 		List<Booking> booking = service.viewAllBookings();
@@ -54,11 +73,26 @@ public class BookingRestController {
 		return bookings;
 	}
 	
+	/**
+	 * method to delete a existing booking, delete is done by providing id
+	 * @param requestData
+	 */
 	@DeleteMapping("/delete")
 	public void deleteBooking(@RequestBody DeleteBookingRequest requestData) {
 		service.cancelBooking(requestData.getId());	
-		//return "Booking delete for id "+requestData.getId();
 	}
 	
+	/**
+	 * method to view the package details of the booking made
+	 * @param id
+	 * @return
+	 */
 	
+	@GetMapping("/package/byid/{id}")
+	public getPackageRequest viewPackage(@PathVariable("id") int id) {
+		Booking book = service.viewBooking(id);
+		Package pack = book.getPack();
+		getPackageRequest fetched = util.toPackageDetails(pack);
+		return fetched;
+	}
 }
