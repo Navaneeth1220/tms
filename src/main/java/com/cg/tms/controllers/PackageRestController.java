@@ -61,10 +61,20 @@ public class PackageRestController {
 	public PackageDetails addPackage(@RequestBody @Valid CreatePackageRequest requestData) {
 
 		Package pack = new Package();
+		Hotel hotel = new Hotel();
+		hotel.setHotelName(requestData.getHotelName());
+		hotel.setHotelDescription(requestData.getHotelDescription());
+		hotel.setHotelType(requestData.getHotelType());
+		hotel.setAddress(requestData.getAddress());
+		hotel.setRent(requestData.getRent());
+		hotel.setStatus(requestData.getHotelStatus());
+
 		pack.setPackageName(requestData.getPackageName());
 		pack.setPackageDescription(requestData.getPackageDescription());
 		pack.setPackageType(requestData.getPackageType());
 		pack.setPackageCost(requestData.getPackageCost());
+		pack.setHotel(hotel);
+
 		Package added = packageService.addPackage(pack);
 		PackageDetails response = packageUtil.toDetailPackage(added);
 		return response;
