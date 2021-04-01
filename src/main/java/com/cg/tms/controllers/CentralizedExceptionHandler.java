@@ -13,6 +13,20 @@ public class CentralizedExceptionHandler {
 	private static final Logger Log = LoggerFactory.getLogger(CentralizedExceptionHandler.class);
 
 	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(TravelsNotFoundException.class)
+	public String handleTravelsNotFound(TravelsNotFoundException e) {
+
+		return e.getMessage();
+	}
+
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(InvalidTravelException.class)
+	public String handleInvalidTravels(InvalidTravelException e) {
+
+		return e.getMessage();
+	}
+
+	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ExceptionHandler(PackageNotFoundException.class)
 	public String handlePackageNotFound(PackageNotFoundException e) {
 

@@ -2,14 +2,10 @@ package com.cg.tms.entities;
 
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class TicketDetails {
-
 	@Id
 	private String ticketId;
 

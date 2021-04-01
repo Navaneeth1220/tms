@@ -18,12 +18,6 @@ public class Package {
 	private double packageCost;
 
 	@OneToOne
-	private PaymentDetails payment;
-
-	@OneToOne
-	private TicketDetails ticket;
-
-	@OneToOne
 	private Hotel hotel;
 
 	public Package() {
@@ -31,17 +25,14 @@ public class Package {
 	}
 
 	public int getPackageId() {
-
 		return packageId;
 	}
 
 	public void setPackageId(int packageId) {
-
 		this.packageId = packageId;
 	}
 
 	public String getPackageName() {
-
 		return packageName;
 	}
 
@@ -80,25 +71,6 @@ public class Package {
 		this.packageCost = packageCost;
 	}
 
-	public PaymentDetails getPayment() {
-
-		return payment;
-	}
-
-	public void setPayment(PaymentDetails payment) {
-
-		this.payment = payment;
-	}
-
-	public TicketDetails getTicket() {
-
-		return ticket;
-	}
-
-	public void setTicket(TicketDetails ticket) {
-
-		this.ticket = ticket;
-	}
 
 	public Hotel getHotel() {
 

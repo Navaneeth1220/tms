@@ -2,11 +2,12 @@
 package com.cg.tms.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Travels {
-
+    @GeneratedValue
 	@Id
 	private int travelsId;
 	private String travelsName;

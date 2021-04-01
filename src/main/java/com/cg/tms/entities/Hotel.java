@@ -9,6 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class Hotel {
 
+	@GeneratedValue
 	@Id
 	private int hotelId;
 	private String hotelName;

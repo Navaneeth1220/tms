@@ -2,11 +2,11 @@ package com.cg.tms;
 
 
 
+import com.cg.tms.manualTesting.BookingServiceImplManualTesting;
 import com.cg.tms.manualTesting.PackageImplManualTesting;
 
 
 import com.cg.tms.manualTesting.CustomerServiceManualTesting;
-import com.cg.tms.manualTesting.PackageUI;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

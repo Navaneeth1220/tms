@@ -64,24 +64,26 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Override
     public List<Customer> viewAllCustomers(int packageId) throws PackageNotFoundException {
-        Optional<Package> optionalpack = packageRepository.findById(packageId);
-        if (!optionalpack.isPresent()) {
+        Optional<Package> optionalPack = packageRepository.findById(packageId);
+        if (!optionalPack.isPresent()) {
             throw new PackageNotFoundException("The package does not exist for the mentioned packageId= " + packageId);
         }
-        Package pack = optionalpack.get();
-        List<Customer> customer = customerRepository.findByPack(pack);
-        return customer;
+        Package pack = optionalPack.get();
+        List<Integer> ids = customerRepository.findByPack(pack);
+        List<Customer>customers=customerRepository.findAllById(ids);
+        return customers;
     }
 
     @Override
     public List<Customer> viewCustomerList(String routeId) throws RouteNotFoundException {
-        Optional<Route> optionalroute = routeRepository.findById(routeId);
-        if (!optionalroute.isPresent()) {
+        Optional<Route> optionalRoute = routeRepository.findById(routeId);
+        if (!optionalRoute.isPresent()) {
             throw new RouteNotFoundException("The route does not exist for the mentioned Route Id =" + routeId);
         }
-        Route route = optionalroute.get();
-        List<Customer> customer = customerRepository.findByRoute(route);
-        return customer;
+        Route route = optionalRoute.get();
+        List<Integer> ids = customerRepository.findByRoute(route);
+        List<Customer>customers=customerRepository.findAllById(ids);
+        return customers;
     }
 
 

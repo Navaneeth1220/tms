@@ -4,71 +4,44 @@ import org.springframework.stereotype.Component;
 import com.cg.tms.dto.*;
 import com.cg.tms.entities.*;
 import com.cg.tms.entities.Package;
+
 import java.util.*;
 
 @Component
 public class PackageUtil {
 
-	public PackageDetails toDetailPackage(Package pack) {
+    public PackageDetails toDetailPackage(Package pack) {
+        PackageDetails packageDetails = new PackageDetails();
+        packageDetails.setPackageId(pack.getPackageId());
+        packageDetails.setPackageName(pack.getPackageName());
+        packageDetails.setPackageDescription(pack.getPackageDescription());
+        packageDetails.setPackageType(pack.getPackageType());
+        packageDetails.setPackageCost(pack.getPackageCost());
 
-		PackageDetails packageDetails = new PackageDetails();
-		packageDetails.setPackageId(pack.getPackageId());
-		packageDetails.setPackageName(pack.getPackageName());
-		packageDetails.setPackageDescription(pack.getPackageDescription());
-		packageDetails.setPackageType(pack.getPackageType());
-		packageDetails.setPackageCost(pack.getPackageCost());
+        Hotel hotel = pack.getHotel();
+        packageDetails.setHotelId(hotel.getHotelId());
+        packageDetails.setHotelName(hotel.getHotelName());
+        packageDetails.setHotelDescription(hotel.getHotelDescription());
+        packageDetails.setHotelType(hotel.getHotelType());
+        packageDetails.setAddress(hotel.getAddress());
+        packageDetails.setRent(hotel.getRent());
+        packageDetails.setHotelStatus(hotel.getStatus());
 
-		Hotel hotel = pack.getHotel();
-		if (hotel != null) {
+        return packageDetails;
 
-			packageDetails.setHotelId(hotel.getHotelId());
-			packageDetails.setHotelName(hotel.getHotelName());
-			packageDetails.setHotelDescription(hotel.getHotelDescription());
-			packageDetails.setHotelType(hotel.getHotelType());
-			packageDetails.setAddress(hotel.getAddress());
-			packageDetails.setRent(hotel.getRent());
-			packageDetails.setHotelStatus(hotel.getStatus());
+    }
 
-		}
+    public List<PackageDetails> toDetailsPackages(Collection<Package> packages) {
 
-		PaymentDetails payment = pack.getPayment();
-		if (payment != null) {
+        List<PackageDetails> packs = new ArrayList<>();
+        for (Package pack : packages) {
 
-			packageDetails.setPaymentId(payment.getPaymentId());
-			packageDetails.setPaymentMode(payment.getPaymentMode());
-			packageDetails.setBankName(payment.getBankName());
-			packageDetails.setCardNo(payment.getCardNo());
-			packageDetails.setNetAmount(payment.getNetAmount());
-			packageDetails.setPaymentStatus(payment.getPaymentStatus());
-			packageDetails.setUserId(payment.getUserId());
+            PackageDetails packageDetails = toDetailPackage(pack);
+            packs.add(packageDetails);
+        }
 
-		}
+        return packs;
 
-		TicketDetails ticket = pack.getTicket();
-		if (ticket != null) {
-
-			packageDetails.setTicketId(ticket.getTicketId());
-			packageDetails.setRouteId(ticket.getRoute().getRouteId());
-			packageDetails.setRouteFrom(ticket.getRoute().getRouteFrom());
-			packageDetails.setRouteFrom(ticket.getRoute().getRouteTo());
-			packageDetails.setTicketStatus(ticket.getStatus());
-		}
-
-		return packageDetails;
-
-	}
-
-	public List<PackageDetails> toDetailsPackages(Collection<Package> packages) {
-
-		List<PackageDetails> packs = new ArrayList<>();
-		for (Package pack : packages) {
-
-			PackageDetails packageDetails = toDetailPackage(pack);
-			packs.add(packageDetails);
-		}
-
-		return packs;
-
-	}
+    }
 
 }

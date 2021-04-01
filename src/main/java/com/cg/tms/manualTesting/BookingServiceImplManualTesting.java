@@ -4,14 +4,12 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
+import com.cg.tms.entities.*;
+import com.cg.tms.entities.Package;
+import com.cg.tms.repository.IRouteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.cg.tms.entities.Booking;
-import com.cg.tms.entities.Hotel;
-import com.cg.tms.entities.Package;
-import com.cg.tms.entities.PaymentDetails;
-import com.cg.tms.entities.TicketDetails;
 import com.cg.tms.exceptions.BookingNotFoundException;
 import com.cg.tms.exceptions.InvalidBookingException;
 import com.cg.tms.exceptions.InvalidIdException;
@@ -26,7 +24,10 @@ public class BookingServiceImplManualTesting {
 	
 	@Autowired
 	private IPackageService pService;
-	
+
+	@Autowired
+	private IRouteRepository routeRepository;
+
 	public void start() {
 		try {
 			
@@ -45,48 +46,58 @@ public class BookingServiceImplManualTesting {
 					"Sy. No. 177 & 177/18, Nowkal Palya, Kaggalipura, Off Kanakapura Main Road, South, Taluk, Bengaluru, Karnataka 560082");
 			hotel1.setRent(4720.0);
 			hotel1.setStatus("Good");
-			
+			pack1.setHotel(hotel1);
+
+
+			Route route = new Route();
+			route.setRouteId("37fry");
+			route=routeRepository.save(route);
+			Package addPackage1 = pService.addPackage(pack1);
 			TicketDetails ticket1 = new TicketDetails();
 			ticket1.setTicketId("401254");
-			ticket1.setRoute(null);
+			ticket1.setRoute(route);
 			ticket1.setStatus("Processing");
-			
-			PaymentDetails payment1 = new PaymentDetails();
-			payment1.setPaymentId(4012);
-			payment1.setPaymentMode("Debit");
-			payment1.setBankName("SBI");
-			payment1.setCardNo(1234567891);
-			payment1.setNetAmount(1000000.0);
-			payment1.setPaymentStatus("Tranaction Complete");
-			payment1.setUserId(21);
-			Package addPackage1 = pService.addPackage(pack1);
-			
-			Booking book= new Booking();
+
+			PaymentDetails paymentDetails1=new PaymentDetails();
+
+			Booking book1= new Booking();
 			LocalDate currentDate = LocalDate.now();
-			book.setBookingDate(currentDate);
-			book.setBookingTitle("Goa Trip");
-			book.setBookingType("Executive");
-			book.setDescription("Thalaiva");
-			book.setUserId(1);
-			book.setPack(addPackage1);
-			Booking booked=service.makeBooking(book);
-			System.out.println("Booking made");
-			display(booked);	
-			
-			Booking book1 = new Booking();
 			book1.setBookingDate(currentDate);
 			book1.setBookingTitle("Goa Trip");
 			book1.setBookingType("Executive");
-			book1.setUserId(2);
+			book1.setDescription("Thalaiva");
+			book1.setUserId(1);
 			book1.setPack(addPackage1);
-			Booking booked1=service.makeBooking(book1);
+			book1.setPayment(paymentDetails1);
+            book1.setTicket(ticket1);
+			Booking booked=service.makeBooking(book1);
+			System.out.println("Booking made");
+			display(booked);
+
+
+			TicketDetails ticket2 = new TicketDetails();
+			ticket2.setTicketId("8771254");
+			ticket2.setRoute(route);
+			ticket2.setStatus("Processing");
+
+
+			PaymentDetails paymentDetails2=new PaymentDetails();
+			Booking book2 = new Booking();
+			book2.setBookingDate(currentDate);
+			book2.setBookingTitle("Goa Trip");
+			book2.setBookingType("Executive");
+			book2.setUserId(2);
+			book2.setPack(addPackage1);
+			book2.setPayment(paymentDetails2);
+			book2.setTicket(ticket2);
+			Booking booked1=service.makeBooking(book2);
 			display(booked1);
 			
 			System.out.println("Display all bookings");
 			List<Booking> bookings=service.viewAllBookings();
 			displayAll(bookings);
 			
-			Booking fetched = service.viewBooking(book.getBookingId());
+			Booking fetched = service.viewBooking(book1.getBookingId());
 			System.out.println("Fetched Booking");
 			display(fetched);
 			

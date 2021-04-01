@@ -2,87 +2,105 @@ package com.cg.tms.entities;
 
 import java.time.LocalDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class Booking {
 
-	@GeneratedValue
-	@Id
-	private int bookingId;
+    @GeneratedValue
+    @Id
+    private int bookingId;
 
-	private String bookingType;
-	private String description;
-	private String bookingTitle;
-	private LocalDate bookingDate;
+    private String bookingType;
+    private String description;
+    private String bookingTitle;
+    private LocalDate bookingDate;
 
-	@ManyToOne
-	private Package pack;
+    @ManyToOne(optional = false)
+    private Package pack;
 
-	private int userId;
+    @OneToOne
+    private PaymentDetails payment;
 
-	
+    @OneToOne
+    private TicketDetails ticket;
 
-	public Booking() {
-	}
 
-	public int getBookingId() {
-		return bookingId;
-	}
+    private int userId;
 
-	public void setBookingId(int bookingId) {
-		this.bookingId = bookingId;
-	}
 
-	public String getBookingType() {
-		return bookingType;
-	}
+    public Booking() {
+    }
 
-	public void setBookingType(String bookingType) {
-		this.bookingType = bookingType;
-	}
+    public int getBookingId() {
+        return bookingId;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setBookingId(int bookingId) {
+        this.bookingId = bookingId;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getBookingType() {
+        return bookingType;
+    }
 
-	public String getBookingTitle() {
-		return bookingTitle;
-	}
+    public void setBookingType(String bookingType) {
+        this.bookingType = bookingType;
+    }
 
-	public void setBookingTitle(String bookingTitle) {
-		this.bookingTitle = bookingTitle;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public LocalDate getBookingDate() {
-		return bookingDate;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setBookingDate(LocalDate bookingDate) {
-		this.bookingDate = bookingDate;
-	}
+    public String getBookingTitle() {
+        return bookingTitle;
+    }
 
-	public Package getPack() {
-		return pack;
-	}
+    public void setBookingTitle(String bookingTitle) {
+        this.bookingTitle = bookingTitle;
+    }
 
-	public void setPack(Package pack) {
-		this.pack = pack;
-	}
+    public LocalDate getBookingDate() {
+        return bookingDate;
+    }
 
-	public int getUserId() {
-		return userId;
-	}
+    public void setBookingDate(LocalDate bookingDate) {
+        this.bookingDate = bookingDate;
+    }
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+    public Package getPack() {
+        return pack;
+    }
 
+    public void setPack(Package pack) {
+        this.pack = pack;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public PaymentDetails getPayment() {
+        return payment;
+    }
+
+    public void setPayment(PaymentDetails payment) {
+        this.payment = payment;
+    }
+
+    public TicketDetails getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(TicketDetails ticket) {
+        this.ticket = ticket;
+    }
 }
