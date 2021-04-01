@@ -2,9 +2,11 @@ package com.cg.tms.controllers;
 
 import java.util.List;
 
-import com.cg.tms.entities.Customer;
-import com.cg.tms.service.ICustomerService;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,11 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.tms.dto.AddFeedbackRequest;
 import com.cg.tms.dto.FeedbackDetails;
+import com.cg.tms.entities.Customer;
 import com.cg.tms.entities.Feedback;
+import com.cg.tms.service.ICustomerService;
 import com.cg.tms.service.IFeedbackService;
 import com.cg.tms.util.FeedbackUtil;
 
-@RequestMapping("/feedback")
+@Validated
+@RequestMapping("/feedbacks")
 @RestController
 public class FeedbackRestController {
     @Autowired
@@ -32,7 +37,7 @@ public class FeedbackRestController {
 
 
     @PostMapping("/add")
-    public FeedbackDetails addFeedback(@RequestBody AddFeedbackRequest requestData) {
+    public FeedbackDetails addFeedback(@RequestBody @Valid AddFeedbackRequest requestData) {
         Feedback feedback = new Feedback();
         Customer customer = customerService.viewCustomer(requestData.getCustomerId());
         feedback.setCustomer(customer);
@@ -45,14 +50,14 @@ public class FeedbackRestController {
     }
 
     @GetMapping("/byid/{id}")
-    public FeedbackDetails getFeedbackById(@PathVariable("id") int id) {
+    public FeedbackDetails getFeedbackById(@PathVariable("id") @Min(1)int id) {
         Feedback feedback = feedbackService.findByFeedbackId(id);
         FeedbackDetails fetched = util.toFeedbackDetail(feedback);
         return fetched;
     }
 
     @GetMapping("/customer/{cid}")
-    public FeedbackDetails getByCustomer(@PathVariable("cid") int cid) {
+    public FeedbackDetails getByCustomer(@PathVariable("cid") @Min(1)int cid) {
         Feedback feedback = feedbackService.findByCustomerId(cid);
         FeedbackDetails details = util.toFeedbackDetail(feedback);
         return details;

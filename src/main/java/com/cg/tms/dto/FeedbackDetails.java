@@ -1,9 +1,7 @@
 package com.cg.tms.dto;
 
-import com.cg.tms.entities.Customer;
-
 public class FeedbackDetails {
-
+	
     private int feedbackId;
     private int customerId;
     private String customerName;

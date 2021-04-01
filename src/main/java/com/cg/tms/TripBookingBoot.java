@@ -7,6 +7,7 @@ import com.cg.tms.manualTesting.PackageImplManualTesting;
 
 
 import com.cg.tms.manualTesting.CustomerServiceManualTesting;
+import com.cg.tms.manualTesting.FeedbackImplManualTesting;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,8 @@ public class TripBookingBoot {
 		book.start();
 		PackageImplManualTesting packageUI = context.getBean(PackageImplManualTesting.class);
 		packageUI.start();
+		FeedbackImplManualTesting feedbackUI=context.getBean(FeedbackImplManualTesting.class);
+		feedbackUI.start();
 
 		Log.debug("i am logged using debug level");
 		/*PackageUI packageUI = context.getBean(PackageUI.class);

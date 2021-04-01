@@ -46,7 +46,19 @@ public class CentralizedExceptionHandler {
 
 		return e.getMessage();
 	}
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(InvalidFeedbackException.class)
+	public String handleInvalidFeedback(InvalidFeedbackException e) {
 
+		return e.getMessage();
+	}
+	
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(FeedbackNotFoundException.class)
+	public String handleFeedbackNotFound(FeedbackNotFoundException e) {
+
+		return e.getMessage();
+	}
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
 	public String handleCatchAllException(Exception e) {

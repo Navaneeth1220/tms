@@ -122,17 +122,18 @@ public class CustomerServiceImplUnitTesting {
 	public void testViewCustomerList() {
 		
 		String routeId="R1";
-		List<Customer>customers=mock(List.class);
+		List<Integer>customers=mock(List.class);
+		List<Customer>fetchedCustomer=mock(List.class);
 		Customer customer=mock(Customer.class);
 		Route route =mock(Route.class);
 		Optional<Customer>optional=Optional.of(customer);
 		Optional<Route>optional1=Optional.of(route);
 		when(routeRepository.findById(routeId)).thenReturn(optional1);
 		when(customerRepository.findByRoute(route)).thenReturn(customers);
+	    when(customerRepository.findAllById(customers)).thenReturn(fetchedCustomer);
 		List<Customer>result=service.viewCustomerList(routeId);
 		Assertions.assertNotNull(result);
-		Assertions.assertSame(result, customers);
-		
+		Assertions.assertSame(result, fetchedCustomer);
 		
 
 		
@@ -145,17 +146,18 @@ public class CustomerServiceImplUnitTesting {
 	public void testViewCustomerList_2() {
 		
 		int packageId=1;
-		List<Customer>customers=mock(List.class);
+		List<Integer>customers=mock(List.class);
+		List<Customer>fetchedCustomer=mock(List.class);
 		Customer customer=mock(Customer.class);
 		Package pack =mock(Package.class);
 		Optional<Customer>optional=Optional.of(customer);
 		Optional<Package>optional1=Optional.of(pack);
 		when(packageRepository.findById(packageId)).thenReturn(optional1);
 		when(customerRepository.findByPack(pack)).thenReturn(customers);
+		when(customerRepository.findAllById(customers)).thenReturn(fetchedCustomer);
 		List<Customer>result=service.viewAllCustomers(packageId);
 		Assertions.assertNotNull(result);
-		Assertions.assertSame(result, customers);
-		
+		Assertions.assertSame(result, fetchedCustomer);
 	
 }
 	}
