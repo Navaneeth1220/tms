@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.cg.tms.service.ReportUnitTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-03-28T06:59:59" hostname="DESKTOP-BCSG44H" time="0.148">
+  <properties/>
+  <testcase name="testFind_1()" classname="com.cg.tms.service.ReportUnitTest" time="0.128"/>
+  <testcase name="testFind_2()" classname="com.cg.tms.service.ReportUnitTest" time="0.004"/>
+  <testcase name="testMake_1()" classname="com.cg.tms.service.ReportUnitTest" time="0.004"/>
+  <testcase name="testMake_3()" classname="com.cg.tms.service.ReportUnitTest" time="0.004"/>
+  <testcase name="testMake_4()" classname="com.cg.tms.service.ReportUnitTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
