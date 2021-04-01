@@ -1,6 +1,7 @@
 package com.cg.tms.dto;
 
 public class BusDetails {
+
 	private int busId;
 	private String busType;
 	private String busNumber;

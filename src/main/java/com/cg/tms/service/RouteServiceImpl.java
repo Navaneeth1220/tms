@@ -15,7 +15,7 @@ import com.cg.tms.exceptions.RouteNotFoundException;
 import com.cg.tms.repository.IRouteRepository;
 
 @Service
-public class RouteServiceImpl implements IRouteService {
+public class RouteServiceImpl extends BaseService implements IRouteService {
 
 	@Autowired
 	private IRouteRepository repository;
@@ -23,6 +23,8 @@ public class RouteServiceImpl implements IRouteService {
 	@Transactional
 	@Override
 	public Route addRoute(Route route) {
+		String generatedId=generateId();
+		route.setRouteId(generatedId);
 		validateRoute(route);
 		Route saved = repository.save(route);
 		return saved;
@@ -62,7 +64,7 @@ public class RouteServiceImpl implements IRouteService {
 		return optional.get();
 	}
 
-	@Transactional
+	
 	@Override
 	public Route searchRoute(String routeId) throws RouteNotFoundException {
 		validateRouteId(routeId);
@@ -74,7 +76,7 @@ public class RouteServiceImpl implements IRouteService {
 		return optional.get();
 	}
 
-	@Transactional
+	
 	@Override
 	public List<Route> viewRouteList() {
 		List<Route> routeList = repository.findAll();

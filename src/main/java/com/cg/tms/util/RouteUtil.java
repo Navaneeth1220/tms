@@ -16,7 +16,6 @@ public class RouteUtil {
 
 	public RouteDetails toRouteDetails(Route route) {
 		RouteDetails details = new RouteDetails();
-		details.setRouteId(route.getRouteId());
 		details.setRouteFrom(route.getRouteFrom());
 		details.setRouteTo(route.getRouteTo());
 		details.setPickupPoint(route.getPickupPoint());

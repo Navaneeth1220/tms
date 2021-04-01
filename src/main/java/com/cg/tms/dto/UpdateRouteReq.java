@@ -2,16 +2,15 @@ package com.cg.tms.dto;
 
 import javax.validation.constraints.NotBlank;
 
-public class CreateRouteRequest {
-    @NotBlank
+public class UpdateRouteReq {
+	@NotBlank
 	private String routeFrom;
-    @NotBlank
+	@NotBlank
 	private String routeTo;
-    @NotBlank
-    private String pickupPoint;
-    @NotBlank
-    private double fare;
-
+	@NotBlank
+	private String pickupPoint;
+	@NotBlank
+	private double fare;
 
 	public String getRouteFrom() {
 		return routeFrom;
@@ -44,5 +43,4 @@ public class CreateRouteRequest {
 	public void setFare(double fare) {
 		this.fare = fare;
 	}
-
 }

@@ -2,7 +2,10 @@ package com.cg.tms.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,7 @@ import com.cg.tms.entities.Bus;
 import com.cg.tms.service.IBusService;
 import com.cg.tms.util.BusUtil;
 
+@Validated
 @RequestMapping("/buses")
 @RestController
 public class BusRestController {
@@ -27,7 +31,7 @@ public class BusRestController {
 	private BusUtil busUtil;
 
 	@PostMapping("/add")
-	public BusDetails addBus(@RequestBody CreateBusRequest requestData) {
+	public BusDetails addBus(@RequestBody @Valid CreateBusRequest requestData) {
 		Bus bus = new Bus();
 		bus.setBusId(requestData.getBusId());
 		bus.setBusType(requestData.getBusType());

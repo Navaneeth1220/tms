@@ -1,10 +1,15 @@
 package com.cg.tms.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class CreateBusRequest {
 
 	private int busId;
+	@NotBlank
 	private String busType;
+	@NotBlank
 	private String busNumber;
+	@NotBlank
 	private int capacity;
 
 	public int getBusId() {

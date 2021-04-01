@@ -2,11 +2,15 @@ package com.cg.tms.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,11 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cg.tms.dto.CreateRouteRequest;
 import com.cg.tms.dto.DeleteRouteRequest;
 import com.cg.tms.dto.RouteDetails;
+import com.cg.tms.dto.UpdateRouteReq;
 import com.cg.tms.dto.toGetBusRequest;
 import com.cg.tms.entities.Route;
 import com.cg.tms.service.IRouteService;
 import com.cg.tms.util.RouteUtil;
 
+@Validated
 @RequestMapping("/routes")
 @RestController
 public class RouteRestController {
@@ -29,9 +35,8 @@ public class RouteRestController {
 	private RouteUtil routeUtil;
 
 	@PostMapping("/add")
-	public RouteDetails addRoute(@RequestBody CreateRouteRequest requestData) {
+	public RouteDetails addRoute(@RequestBody @Valid CreateRouteRequest requestData) {
 		Route route = new Route();
-		route.setRouteId(requestData.getRouteId());
 		route.setRouteFrom(requestData.getRouteFrom());
 		route.setRouteTo(requestData.getRouteTo());
 		route.setPickupPoint(requestData.getPickupPoint());
@@ -42,7 +47,7 @@ public class RouteRestController {
 	}
 
 	@GetMapping(value = "/byid/{id}")
-	public RouteDetails fetchPackage(@PathVariable("id") String routeId) {
+	public RouteDetails fetchRoute(@PathVariable("id") String routeId) {
 
 		Route route = routeService.searchRoute(routeId);
 		RouteDetails routeDetails = routeUtil.toRouteDetails(route);
@@ -57,7 +62,7 @@ public class RouteRestController {
 	}
 
 	@DeleteMapping("/deleteRoute")
-	public void deleteRoute(@RequestBody DeleteRouteRequest requestData) {
+	public void deleteRoute(@RequestBody @Valid DeleteRouteRequest requestData) {
 
 		routeService.removeRoute(requestData.getId());
 
@@ -71,4 +76,16 @@ public class RouteRestController {
 		return busList;
 	}
 
+	@PutMapping("/update/route/{routeId}")
+	public RouteDetails toUpdateRoute(@RequestBody @Valid UpdateRouteReq requestData,
+			@PathVariable("routeId") String routeId) {
+		Route route = routeService.searchRoute(routeId);
+		route.setRouteFrom(requestData.getRouteFrom());
+		route.setRouteTo(requestData.getRouteTo());
+		route.setPickupPoint(requestData.getPickupPoint());
+		route.setFare(requestData.getFare());
+		Route savedRoute = routeService.updateRoute(route);
+		RouteDetails details = routeUtil.toRouteDetails(savedRoute);
+		return details;
+	}
 }
