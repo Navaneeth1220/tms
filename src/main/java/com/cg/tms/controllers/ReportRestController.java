@@ -2,7 +2,11 @@ package com.cg.tms.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +25,7 @@ import com.cg.tms.service.IReportService;
 
 import com.cg.tms.util.ReportUtil;
 
+@Validated
 @RequestMapping("/reports")
 @RestController
 public class ReportRestController {
@@ -30,7 +35,7 @@ public class ReportRestController {
 	private ReportUtil util;
 
 	@PostMapping("/add")
-	public ReportDetails addReport(@RequestBody AddReport requestData) {
+	public ReportDetails addReport(@RequestBody @Valid AddReport requestData) {
 		Report report = new Report();
 		report.setReportName(requestData.getReportName());
 		report.setReportType(requestData.getReportType());
@@ -40,7 +45,7 @@ public class ReportRestController {
 	}
 
 	@GetMapping("/byid/{id}")
-	public ReportDetails findBooking(@PathVariable("id") int id) {
+	public ReportDetails viewReport(@PathVariable("id") @Min(1) int id) {
 		Report report = service.viewReport(id);
 		ReportDetails fetched = util.toReportDetail(report);
 		return fetched;
@@ -54,7 +59,7 @@ public class ReportRestController {
 	}
 
 	@DeleteMapping("/delete")
-	public void deleteReport(@RequestBody DeleteReport requestData) {
+	public void deleteReport(@RequestBody @Valid DeleteReport requestData) {
 		service.deleteReport(requestData.getReportId());
 		// return "Report delete for id "+requestData.getId();
 	}

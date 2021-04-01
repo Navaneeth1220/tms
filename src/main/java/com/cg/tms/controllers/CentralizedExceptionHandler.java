@@ -45,7 +45,23 @@ public class CentralizedExceptionHandler {
 	public String handleInvalidPackageType(InvalidPackageTypeException e) {
 
 		return e.getMessage();
+		
 	}
+
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(ReportNotFoundException.class)
+	public String handleReportNotFound(ReportNotFoundException e) {
+
+		return e.getMessage();
+	}
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(InvalidReportException.class)
+	public String handleInvalidReport(InvalidReportException e) {
+
+		return e.getMessage();
+	}
+	
+
 
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
