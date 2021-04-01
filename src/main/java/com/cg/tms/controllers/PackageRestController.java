@@ -15,8 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.cg.tms.dto.*;
 import com.cg.tms.entities.Package;
 import java.util.*;
-import org.springframework.http.HttpStatus;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
+
+@Validated
 @RequestMapping("/packages")
 @RestController
 public class PackageRestController {
@@ -30,7 +36,7 @@ public class PackageRestController {
 	private PackageUtil packageUtil;
 
 	@GetMapping(value = "/byid/{id}")
-	public PackageDetails fetchPackage(@PathVariable("id") int packageId) {
+	public PackageDetails fetchPackage(@PathVariable("id") @Min(1) int packageId) {
 		LOG.debug("packageId in fetchpackage in PackageRestController " + packageId);
 		Package pack = packageService.searchPackage(packageId);
 		PackageDetails packageDetails = packageUtil.toDetailPackage(pack);
@@ -47,7 +53,7 @@ public class PackageRestController {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/add")
-	public PackageDetails addPackage(@RequestBody CreatePackageRequest requestData) {
+	public PackageDetails addPackage(@RequestBody @Valid CreatePackageRequest requestData) {
 
 		Package pack = new Package();
 		pack.setPackageName(requestData.getPackageName());
@@ -60,7 +66,7 @@ public class PackageRestController {
 	}
 
 	@DeleteMapping("/delete")
-	public String deletePackage(@RequestBody DeletePackageRequest requestData) {
+	public String deletePackage(@RequestBody @Valid DeletePackageRequest requestData) {
 
 		packageService.deletePackage(requestData.getPackageId());
 		return "package deleted for packageId=" + requestData.getPackageId();

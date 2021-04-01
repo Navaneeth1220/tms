@@ -4,6 +4,7 @@ import com.cg.tms.entities.Customer;
 
 public class AddFeedbackRequest {
 
+	
 	private int  customerId;
 	private String feedback;
 	private int rating;

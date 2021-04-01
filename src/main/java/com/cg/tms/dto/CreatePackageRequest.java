@@ -1,10 +1,16 @@
 package com.cg.tms.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class CreatePackageRequest {
 
+	@NotBlank
 	private String packageName;
+	@NotBlank
 	private String packageDescription;
+	@NotBlank
 	private String packageType;
+	@NotBlank
 	private double packageCost;
 
 	public String getPackageName() {

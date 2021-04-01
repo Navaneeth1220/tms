@@ -38,8 +38,7 @@ public class CustomerServiceImplUnitTesting {
 	@InjectMocks
 	CustomerServiceImpl service;
 	/*
-	 * Success scenario
-	 * Addition of customer
+	 * Success scenario Addition of customer
 	 * 
 	 */
 
@@ -62,14 +61,11 @@ public class CustomerServiceImplUnitTesting {
 		Assertions.assertEquals(customerId, result.getCustomerId());
 	}
 	/*
-	 *  success scenario
-	 *  View_all_Test
+	 * success scenario View_all_Test
 	 */
 
-
 	/*
-	 * fail case scenario
-	 * testValidateCustomerName 
+	 * fail case scenario testValidateCustomerName
 	 */
 	@Test
 	public void testValidateCustomerName_1() {
@@ -81,8 +77,7 @@ public class CustomerServiceImplUnitTesting {
 	}
 
 	/*
-	 * Success Scenario
-	 * testValidateCustomerName 
+	 * Success Scenario testValidateCustomerName
 	 */
 	@Test
 	public void testValidateCustomerName_2() {
@@ -92,8 +87,7 @@ public class CustomerServiceImplUnitTesting {
 	}
 
 	/*
-	 * Scenario 2: Testing updationOfCustomer
-	 * Success Scenario 
+	 * Scenario 2: Testing updationOfCustomer Success Scenario
 	 * 
 	 */
 	@Test
@@ -114,48 +108,45 @@ public class CustomerServiceImplUnitTesting {
 	}
 
 	/*
-	 *Scenario 3: Getting a list of customers with same route ID
-	 *Success scenario
+	 * Scenario 3: Getting a list of customers with same route ID Success scenario
 	 *
 	 */
 	@Test
 	public void testViewCustomerList() {
-		
-		String routeId="R1";
-		List<Customer>customers=mock(List.class);
-		Customer customer=mock(Customer.class);
-		Route route =mock(Route.class);
-		Optional<Customer>optional=Optional.of(customer);
-		Optional<Route>optional1=Optional.of(route);
+
+		String routeId = "R1";
+		List<Integer> customers = mock(List.class);
+		List<Customer> fetchedCustomer = mock(List.class);
+		Customer customer = mock(Customer.class);
+		Route route = mock(Route.class);
+		Optional<Customer> optional = Optional.of(customer);
+		Optional<Route> optional1 = Optional.of(route);
 		when(routeRepository.findById(routeId)).thenReturn(optional1);
 		when(customerRepository.findByRoute(route)).thenReturn(customers);
-		List<Customer>result=service.viewCustomerList(routeId);
+		when(customerRepository.findAllById(customers)).thenReturn(fetchedCustomer);
+		List<Customer> result = service.viewCustomerList(routeId);
 		Assertions.assertNotNull(result);
-		Assertions.assertSame(result, customers);
-		
-		
-
-		
+		Assertions.assertSame(result, fetchedCustomer);
 	}
+
 	/*
-	 * Scenerio 4 :getting a list of customers with same package Id
-	 * success scenerio
+	 * Scenerio 4 :getting a list of customers with same package Id success scenerio
 	 */
 	@Test
 	public void testViewCustomerList_2() {
-		
-		int packageId=1;
-		List<Customer>customers=mock(List.class);
-		Customer customer=mock(Customer.class);
-		Package pack =mock(Package.class);
-		Optional<Customer>optional=Optional.of(customer);
-		Optional<Package>optional1=Optional.of(pack);
+
+		int packageId = 1;
+		List<Integer> customers = mock(List.class);
+		List<Customer> fetchedCustomer = mock(List.class);
+		Customer customer = mock(Customer.class);
+		Package pack = mock(Package.class);
+		Optional<Customer> optional = Optional.of(customer);
+		Optional<Package> optional1 = Optional.of(pack);
 		when(packageRepository.findById(packageId)).thenReturn(optional1);
 		when(customerRepository.findByPack(pack)).thenReturn(customers);
-		List<Customer>result=service.viewAllCustomers(packageId);
+		when(customerRepository.findAllById(customers)).thenReturn(fetchedCustomer);
+		List<Customer> result = service.viewAllCustomers(packageId);
 		Assertions.assertNotNull(result);
-		Assertions.assertSame(result, customers);
-		
-	
-}
+		Assertions.assertSame(result, fetchedCustomer);
 	}
+}

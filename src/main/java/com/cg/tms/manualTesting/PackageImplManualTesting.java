@@ -23,6 +23,11 @@ public class PackageImplManualTesting {
 			System.out.println();
 			System.out.println("Adding a new Package: ");
 
+
+			/*
+			 * Creating Hotel : hotel1 object
+			 * 
+			 * */
 			Hotel hotel1 = new Hotel();
 			hotel1.setHotelName("Guhantara");
 			hotel1.setHotelDescription("Authentic and relaxing");
@@ -33,7 +38,10 @@ public class PackageImplManualTesting {
 			hotel1.setStatus("Good");
 
 
-
+			/*
+			 * Creating Package : pack1 object
+			 * 
+			 * */
 			Package pack1 = new Package();
 			pack1.setPackageName("Local");
 			pack1.setPackageDescription("diverse and cultural");
@@ -44,6 +52,10 @@ public class PackageImplManualTesting {
 			Package addPackage1 = packageService.addPackage(pack1);
 			displayPackage(addPackage1);
 
+			/*
+			 * Creating Hotel : hotel2 object
+			 * 
+			 * */
 			Hotel hotel2 = new Hotel();
 			hotel2.setHotelName("Leela Palace");
 			hotel2.setHotelDescription("Luxurious and sparkling");
@@ -53,7 +65,10 @@ public class PackageImplManualTesting {
 			hotel2.setRent(5720.0);
 			hotel2.setStatus("Very good");
 
-
+			/*
+			 * Creating Package : pack2 object
+			 * 
+			 * */
 			Package pack2 = new Package();
 			pack2.setPackageName("National");
 			pack2.setPackageDescription("challenging adventure");
@@ -64,6 +79,10 @@ public class PackageImplManualTesting {
 			Package addPackage2 = packageService.addPackage(pack2);
 			displayPackage(addPackage2);
 
+			/*
+			 * Creating Hotel : hotel3 object
+			 * 
+			 * */
 			Hotel hotel3 = new Hotel();
 			hotel3.setHotelName("Taj Holiday");
 			hotel3.setHotelDescription("Lively and Charming");
@@ -73,6 +92,10 @@ public class PackageImplManualTesting {
 			hotel3.setStatus("Excellent");
 
 
+			/*
+			 * Creating Package : pack3 object
+			 * 
+			 * */
 			Package pack3 = new Package();
 			pack3.setPackageName("Holiday");
 			pack3.setPackageDescription("peace and relaxation");
@@ -80,19 +103,35 @@ public class PackageImplManualTesting {
 			pack3.setPackageCost(12500.0);
 			pack3.setHotel(hotel3);
 
+			/*
+			 * Adding a package : pack to the repository
+			 * 
+			 * */
 			Package addPackage3 = packageService.addPackage(pack3);
 			displayPackage(addPackage3);
 
+			/*
+			 * Deleting a package : pack from the repository
+			 * 
+			 * */
 			System.out.println();
 			System.out.println("Deleting a package: ");
 			Package deletePackage = packageService.deletePackage(pack3.getPackageId());
 			displayPackage(deletePackage);
 
+			/*
+			 * Searching a package : pack from the repository
+			 * 
+			 * */
 			System.out.println();
 			System.out.println("Searching a package: ");
 			Package searchPackage = packageService.searchPackage(pack1.getPackageId());
 			displayPackage(searchPackage);
 
+			/*
+			 * Viewing all packages : packs from the repository
+			 * 
+			 * */
 			System.out.println();
 			System.out.println("Viewing all packages: ");
 			List<Package> viewAllPackages = packageService.viewAllPackages();
@@ -131,6 +170,10 @@ public class PackageImplManualTesting {
 
 	}
 
+	/*
+	 * Displaying a package : pack
+	 * 
+	 * */
 	public void displayPackage(Package pack) {
 
 		System.out.println();
@@ -144,6 +187,10 @@ public class PackageImplManualTesting {
 
 	}
 
+	/*
+	 * Displaying all packages : packs
+	 * 
+	 * */
 	public void displayAllPackages(Collection<Package> packs) {
 
 		for (Package pack : packs) {
