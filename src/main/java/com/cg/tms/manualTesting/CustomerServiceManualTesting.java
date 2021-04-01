@@ -25,7 +25,7 @@ public class CustomerServiceManualTesting {
     private IRouteRepository routeRepository;
 
     @Autowired
-    private ICustomerService service;
+    private ICustomerService customerService;
 
     @Autowired
     private IPackageRepository packageRepository;
@@ -40,33 +40,58 @@ public class CustomerServiceManualTesting {
     private IBookingRepository bookingRepository;
 
     public void start() {
+    	/*
+    	 * Two new customers are added in the database
+    	 */
         Customer customer1 = new Customer();
         Customer customer2 = new Customer();
         customer1.setCustomerName("Mohan");
         customer1.setAddress("kancheepuram");
+        customer1.setEmail("msp@gmail.com");
+        customer1.setMobileNo("8754489885");
         customer2.setCustomerName("Navneeth");
         customer2.setAddress("chennai");
-        customer1 = service.addCustomer(customer1);
-        customer2 = service.addCustomer(customer2);
+        customer2.setEmail("navneth@gmail.com");
+        customer2.setMobileNo("8755448955");
+        customer1 = customerService.addCustomer(customer1);
+        customer2 = customerService.addCustomer(customer2);
         display(customer1);
         display(customer2);
+        /*
+         * Updating the name and address of the Customer 1
+         */
         customer1.setCustomerName("MSP");
         customer1.setAddress("Chennai");
-        customer1 = service.addCustomer(customer1);
+        customer1 = customerService.updateCustomer(customer1);
         display(customer1);
-
+        
+        
+        Customer deletecustomer = customerService.deleteCustomer(customer2);
+		display(deletecustomer);
+        System.out.println("****************DELETED A CUSTOMER*************");
+        /*
+         * payment details  and ticket details are saved in the database
+         * 
+         */
         PaymentDetails paymentDetails=new PaymentDetails();
         paymentDetails.setUserId(customer1.getCustomerId());
         paymentDetails=paymentRepository.save(paymentDetails);
         TicketDetails ticketDetails =new TicketDetails();
         ticketDetails.setTicketId("t1");
+        /*
+         * routes are setted for the Customer 1 and saved in the database
+         */
         Route route1 = new Route();
         route1.setRouteId("R1");
         route1.setRouteFrom("Jaipur");
         route1.setRouteTo("Delhi");
         route1.setFare(600);
+        /*
+         * package details are setted for Customer 1 and saved in the database
+         */
 
         Package pack = new Package();
+        pack.setPackageId(8);
         pack.setPackageName("Local");
         pack.setPackageDescription("diverse and cultural");
         pack.setPackageType("Normal");
@@ -76,7 +101,9 @@ public class CustomerServiceManualTesting {
         route1 = routeRepository.save(route1);
         ticketDetails.setRoute(route1);
         ticketDetails=ticketRepository.save(ticketDetails);
-
+         /*
+          * booking is done and saved in database
+          */
         Booking booking=new Booking();
         booking.setTicket(ticketDetails);
         booking.setPayment(paymentDetails);
@@ -85,16 +112,16 @@ public class CustomerServiceManualTesting {
         booking=bookingRepository.save(booking);
 
 
-        List<Customer> list1 = service.viewAllCustomers(saved.getPackageId());
-        System.out.println("********display customers by package****");
+        List<Customer> list1 = customerService.viewAllCustomers(saved.getPackageId());
+        System.out.println("**********display customers by package**********");
         for (Customer i : list1) {
             System.out.println(i.getCustomerId());
 
         }
 
 
-        List<Customer> list2 = service.viewCustomerList(route1.getRouteId());
-        System.out.println("***displaying customers by route");
+        List<Customer> list2 = customerService.viewCustomerList(route1.getRouteId());
+        System.out.println("**********displaying customers by route***********");
         for (Customer j : list2) {
             System.out.println(j.getCustomerId());
         }

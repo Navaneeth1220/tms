@@ -89,7 +89,7 @@ public class CustomerServiceImpl implements ICustomerService {
 
     void validateCustomer(Customer customer) {
         if (customer == null) {
-            throw new InvalidCustomerException("packageName can't be null or empty");
+            throw new InvalidCustomerException("Customer can't be null or empty");
         }
         validateCustomerAddress(customer.getAddress());
         validateCustomerName(customer.getCustomerName());
@@ -98,7 +98,7 @@ public class CustomerServiceImpl implements ICustomerService {
     void validateCustomerAddress(String address) {
         if (address == null || address.isEmpty() || address.trim().isEmpty()) {
 
-            throw new InvalidCustomerException("packageName can't be null or empty");
+            throw new InvalidCustomerAddressException("CustomerAddress can't be null or empty");
         }
 
     }
@@ -106,7 +106,7 @@ public class CustomerServiceImpl implements ICustomerService {
     void validateCustomerName(String customerName) {
         if (customerName == null || customerName.isEmpty() || customerName.trim().isEmpty()) {
 
-            throw new InvalidCustomerException("packageName can't be null or empty");
+            throw new InvalidCustomerNameException("CustomerName can't be null or empty");
         }
     }
 

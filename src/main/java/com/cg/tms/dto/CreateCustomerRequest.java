@@ -1,10 +1,17 @@
 package com.cg.tms.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class CreateCustomerRequest {
+	@NotBlank
 	private String customerName;
+	@NotBlank
 	private String customerPassword;
+	@NotBlank
 	private String address;
+	@NotBlank
 	private String mobileNo;
+	@NotBlank
 	private String email;
 
 	public String getCustomerName() {

@@ -2,8 +2,12 @@ package com.cg.tms.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,11 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.tms.dto.CreateCustomerRequest;
 import com.cg.tms.dto.CustomerDetails;
-import com.cg.tms.dto.DeleteCustomerRequest;
+import com.cg.tms.dto.FetchCustomerByPackageId;
 import com.cg.tms.entities.Customer;
 import com.cg.tms.service.ICustomerService;
 import com.cg.tms.util.CustomerUtil;
 
+@Validated
 @RequestMapping("/customers")
 @RestController
 public class CustomerRestController {
@@ -31,7 +36,7 @@ public class CustomerRestController {
 	private CustomerUtil customerUtil;
 
 	@GetMapping(value = "/byid/{id}")
-	public CustomerDetails fetchCustomer(@PathVariable("id") int customerId) {
+	public CustomerDetails fetchCustomer(@PathVariable("id") @Min(1)int customerId) {
 		Customer customer = customerService.viewCustomer(customerId);
 		CustomerDetails customerDetails = customerUtil.toDetailCustomer(customer);
 		return customerDetails;
@@ -40,7 +45,7 @@ public class CustomerRestController {
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/addCustomer")
-	public CustomerDetails addCustomer(@RequestBody CreateCustomerRequest requestData) {
+	public CustomerDetails addCustomer(@RequestBody @Valid CreateCustomerRequest requestData) {
 
 		Customer customer = new Customer();
 		customer.setCustomerName(requestData.getCustomerName());
@@ -51,10 +56,24 @@ public class CustomerRestController {
 		Customer added = customerService.addCustomer(customer);
 		CustomerDetails customerDetails = customerUtil.toDetailCustomer(added);
 		return customerDetails;
+	} 
+	
+	@GetMapping("/package/{id}")
+	public List<FetchCustomerByPackageId> fetchCustomerByPack(@PathVariable("id")@Min(1) int packageId){
+		List<Customer> customers =customerService.viewAllCustomers(packageId);
+		List<FetchCustomerByPackageId> fetched = customerUtil.toCustomerDetails(customers);
+		return fetched;
 	}
+	@GetMapping("/route/{id}")
+	public List<FetchCustomerByPackageId> fetchCustomerByroute(@PathVariable("id")String routeId ){
+		List<Customer> customers =customerService.viewCustomerList(routeId);
+		List<FetchCustomerByPackageId> fetched = customerUtil.toCustomerDetails(customers);
+		return fetched;
+	}
+	
 
 	@DeleteMapping("/deleteCustomer/{cid}")
-	public String deleteCustomer(@RequestBody int cid) {
+	public String deleteCustomer(@RequestBody @Valid int cid) {
         Customer customer=customerService.viewCustomer(cid);
 		customerService.deleteCustomer(customer);
 		return "deleted customer";

@@ -36,7 +36,7 @@ public class CustomerServiceImplUnitTesting {
 
 	@Spy
 	@InjectMocks
-	CustomerServiceImpl service;
+	CustomerServiceImpl customerService;
 	/*
 	 * Success scenario
 	 * Addition of customer
@@ -45,27 +45,21 @@ public class CustomerServiceImplUnitTesting {
 
 	@Test
 	void test_AddCustomer() {
+		
+		Customer customer = new Customer();
 		int customerId = 1;
 		String customerName = "msp";
 		String customerAddress = "chennai";
-
-		Customer customer = new Customer();
 		customer.setAddress(customerAddress);
 		customer.setCustomerName(customerName);
 		customer.setCustomerId(customerId);
 		when(customerRepository.save(customer)).thenReturn(customer);
-		Customer result = service.addCustomer(customer);
-
+		Customer result = customerService.addCustomer(customer);
 		Assertions.assertNotNull(result);
 		Assertions.assertEquals(customerName, result.getCustomerName());
 		Assertions.assertEquals(customerAddress, result.getAddress());
 		Assertions.assertEquals(customerId, result.getCustomerId());
 	}
-	/*
-	 *  success scenario
-	 *  View_all_Test
-	 */
-
 
 	/*
 	 * fail case scenario
@@ -75,7 +69,7 @@ public class CustomerServiceImplUnitTesting {
 	public void testValidateCustomerName_1() {
 
 		String CustomerName = "";
-		Executable executable = () -> service.validateCustomerName(CustomerName);
+		Executable executable = () -> customerService.validateCustomerName(CustomerName);
 		Assertions.assertThrows(InvalidCustomerException.class, executable);
 
 	}
@@ -88,7 +82,7 @@ public class CustomerServiceImplUnitTesting {
 	public void testValidateCustomerName_2() {
 
 		String CustomerName = "Mohan";
-		service.validateCustomerName(CustomerName);
+		customerService.validateCustomerName(CustomerName);
 	}
 
 	/*
@@ -104,10 +98,10 @@ public class CustomerServiceImplUnitTesting {
 		String customerpassword = "Msp23";
 		Customer customer = mock(Customer.class);
 		Optional<Customer> optional = Optional.of(customer);
-		doNothing().when(service).validateCustomer(customer);
+		doNothing().when(customerService).validateCustomer(customer);
 		when(customerRepository.existsById(customer.getCustomerId())).thenReturn(true);
 		when(customerRepository.save(customer)).thenReturn(customer);
-		Customer result = service.updateCustomer(customer);
+		Customer result = customerService.updateCustomer(customer);
 		Assertions.assertNotNull(result);
 		Assertions.assertSame(result, customer);
 
@@ -122,16 +116,18 @@ public class CustomerServiceImplUnitTesting {
 	public void testViewCustomerList() {
 		
 		String routeId="R1";
-		List<Customer>customers=mock(List.class);
+		List<Integer>customers=mock(List.class);
+		List<Customer>fetchedCustomer=mock(List.class);
 		Customer customer=mock(Customer.class);
 		Route route =mock(Route.class);
 		Optional<Customer>optional=Optional.of(customer);
 		Optional<Route>optional1=Optional.of(route);
 		when(routeRepository.findById(routeId)).thenReturn(optional1);
 		when(customerRepository.findByRoute(route)).thenReturn(customers);
-		List<Customer>result=service.viewCustomerList(routeId);
+	    when(customerRepository.findAllById(customers)).thenReturn(fetchedCustomer);
+		List<Customer>result=customerService.viewCustomerList(routeId);
 		Assertions.assertNotNull(result);
-		Assertions.assertSame(result, customers);
+		Assertions.assertSame(result, fetchedCustomer);
 		
 		
 
@@ -145,16 +141,18 @@ public class CustomerServiceImplUnitTesting {
 	public void testViewCustomerList_2() {
 		
 		int packageId=1;
-		List<Customer>customers=mock(List.class);
+		List<Integer>customers=mock(List.class);
+		List<Customer>fetchedCustomer=mock(List.class);
 		Customer customer=mock(Customer.class);
 		Package pack =mock(Package.class);
 		Optional<Customer>optional=Optional.of(customer);
 		Optional<Package>optional1=Optional.of(pack);
 		when(packageRepository.findById(packageId)).thenReturn(optional1);
 		when(customerRepository.findByPack(pack)).thenReturn(customers);
-		List<Customer>result=service.viewAllCustomers(packageId);
+		when(customerRepository.findAllById(customers)).thenReturn(fetchedCustomer);
+		List<Customer>result=customerService.viewAllCustomers(packageId);
 		Assertions.assertNotNull(result);
-		Assertions.assertSame(result, customers);
+		Assertions.assertSame(result, fetchedCustomer);
 		
 	
 }

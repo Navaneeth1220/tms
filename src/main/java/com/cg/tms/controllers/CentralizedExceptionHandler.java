@@ -47,6 +47,7 @@ public class CentralizedExceptionHandler {
 		return e.getMessage();
 	}
 
+
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	@ExceptionHandler(Exception.class)
 	public String handleCatchAllException(Exception e) {
