@@ -10,7 +10,7 @@ public class Feedback {
 	@Id
 	private int feedbackId;
 
-	@OneToOne
+	@ManyToOne
 	private Customer customer;
 	private String feedback;
 	private int rating;

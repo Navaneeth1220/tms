@@ -19,26 +19,7 @@ public class Customer {
     private String email;
 
     @ManyToOne
-    private Route route;
-
-    @ManyToOne
-    private Package pack;
-
-    public Package getPack() {
-		return pack;
-	}
-
-	public void setPack(Package pack) {
-		this.pack = pack;
-	}
-
-	public Route getRoute() {
-        return route;
-    }
-
-    public void setRoute(Route route) {
-        this.route = route;
-    }
+    private  Package pack;
 
     public int getCustomerId() {
         return customerId;
