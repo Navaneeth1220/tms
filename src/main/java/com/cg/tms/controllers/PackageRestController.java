@@ -1,5 +1,15 @@
 package com.cg.tms.controllers;
 
+import java.util.List;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,19 +18,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.slf4j.*;
-import com.cg.tms.service.*;
-import com.cg.tms.util.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.cg.tms.dto.*;
+
+import com.cg.tms.dto.CreatePackageRequest;
+import com.cg.tms.dto.DeletePackageRequest;
+import com.cg.tms.dto.PackageDetails;
+import com.cg.tms.entities.Hotel;
 import com.cg.tms.entities.Package;
-import java.util.*;
-
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
+import com.cg.tms.service.IPackageService;
+import com.cg.tms.util.PackageUtil;
 
 @Validated
 @RequestMapping("/packages")
@@ -61,7 +66,7 @@ public class PackageRestController {
 		pack.setPackageType(requestData.getPackageType());
 		pack.setPackageCost(requestData.getPackageCost());
 		Package added = packageService.addPackage(pack);
-		PackageDetails response  = packageUtil.toDetailPackage(added);
+		PackageDetails response = packageUtil.toDetailPackage(added);
 		return response;
 	}
 

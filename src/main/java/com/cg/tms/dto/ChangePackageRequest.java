@@ -1,8 +1,12 @@
 package com.cg.tms.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class ChangePackageRequest {
 
+	@NotBlank
 	private int packageId;
+	@NotBlank
 	private String packageName;
 
 	public int getPackageId() {
