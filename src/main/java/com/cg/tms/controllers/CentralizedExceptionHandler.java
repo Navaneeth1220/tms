@@ -27,8 +27,8 @@ public class CentralizedExceptionHandler {
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler(InvalidPackageNameException.class)
-	public String handleInvalidPackageName(InvalidPackageNameException e) {
+	@ExceptionHandler(InvalidCustomerNameException.class)
+	public String handleInvalidPackageName(InvalidCustomerNameException e) {
 
 		return e.getMessage();
 	}
@@ -43,6 +43,27 @@ public class CentralizedExceptionHandler {
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(InvalidPackageTypeException.class)
 	public String handleInvalidPackageType(InvalidPackageTypeException e) {
+
+		return e.getMessage();
+	}
+	
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ExceptionHandler(CustomerNotFoundException.class)
+	public String handleCustomerNotFound(CustomerNotFoundException e) {
+
+		return e.getMessage();
+	}
+	
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(InvalidCustomerNameException.class)
+	public String handleInvalidCustomerName(InvalidCustomerNameException e) {
+
+		return e.getMessage();
+	}
+	
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(InvalidCustomerAddressException.class)
+	public String handleInvalidCustomerAddress(InvalidCustomerAddressException e) {
 
 		return e.getMessage();
 	}
