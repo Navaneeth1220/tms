@@ -7,6 +7,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,10 +22,16 @@ import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.cg.tms.entities.Booking;
+import com.cg.tms.entities.PaymentDetails;
+import com.cg.tms.entities.TicketDetails;
 import com.cg.tms.exceptions.BookingNotFoundException;
 import com.cg.tms.exceptions.InvalidBookingException;
 import com.cg.tms.exceptions.InvalidIdException;
 import com.cg.tms.repository.IBookingRepository;
+import com.cg.tms.repository.IPaymentDetailsRepository;
+import com.cg.tms.repository.ITicketDetailsRepository;
+
+import sun.security.krb5.internal.Ticket;
 
 @ExtendWith(MockitoExtension.class)
 class BookingServiceImplUnitTest {
@@ -32,25 +39,46 @@ class BookingServiceImplUnitTest {
 	@Mock
 	IBookingRepository repo;
 
+	@Mock
+	ITicketDetailsRepository ticketRepository;
+	
+	@Mock
+	IPaymentDetailsRepository paymentRepository;
+
 	@Spy
 	@InjectMocks
 	BookingServiceImpl service;
 
-	
 	/**
-	 *  Scenario Successful booking Testcase
+	 * Scenario Successful booking Testcase
 	 */
 	@Test
 	void testMake_1() {
-
+		String ticketId="dads";
+		String status="reserved";
 		Booking book = mock(Booking.class);
-	
-		Mockito.when(repo.save(book)).thenReturn(book);
+		book.setBookingDate(LocalDate.now());
 		doNothing().when(service).validateBooking(book);
-		Booking result = service.makeBooking(book); 
+		when(service.generateId()).thenReturn(ticketId);
+		
+		TicketDetails ticket =book.getTicket();
+		ticket.setStatus(status);
+		ticket.setTicketId(ticketId);
+		
+		when(ticketRepository.save(ticket)).thenReturn(ticket);
+		book.setTicket(ticket);
+		
+		
+		PaymentDetails payment = book.getPayment();
+		when(paymentRepository.save(payment)).thenReturn(payment);
+		book.setPayment(payment);
+		
+		when(repo.save(book)).thenReturn(book);
+		Booking result = service.makeBooking(book);
 		Assertions.assertNotNull(result);
+		Assertions.assertSame(result,book);
 		verify(repo).save(book);
-
+		
 	}
 
 	/**
@@ -59,15 +87,15 @@ class BookingServiceImplUnitTest {
 	@Test
 	void testMake_2() {
 		int userId = -1;
-		Booking book=mock(Booking.class);
+		Booking book = mock(Booking.class);
 		book.setUserId(userId);
 		doThrow(InvalidIdException.class).when(service).validateBooking(book);
 		Executable executable = () -> service.makeBooking(book);
 		Assertions.assertThrows(InvalidIdException.class, executable);
-		verify(repo,never()).save(book);
+		verify(repo, never()).save(book);
 	}
 
-	/** 
+	/**
 	 * scenario booking type cannot be null
 	 */
 	@Test
@@ -78,7 +106,7 @@ class BookingServiceImplUnitTest {
 		doThrow(InvalidBookingException.class).when(service).validateBooking(book);
 		Executable executable = () -> service.makeBooking(book);
 		Assertions.assertThrows(InvalidBookingException.class, executable);
-		verify(repo,never()).save(book);
+		verify(repo, never()).save(book);
 
 	}
 
@@ -93,7 +121,7 @@ class BookingServiceImplUnitTest {
 		Executable executable = () -> service.makeBooking(book);
 		doThrow(InvalidBookingException.class).when(service).validateBooking(book);
 		Assertions.assertThrows(InvalidBookingException.class, executable);
-		verify(repo,never()).save(book);
+		verify(repo, never()).save(book);
 
 	}
 
@@ -120,41 +148,38 @@ class BookingServiceImplUnitTest {
 		Executable executable = () -> service.viewBooking(id);
 		Assertions.assertThrows(BookingNotFoundException.class, executable);
 	}
-	
+
 	/**
-	 * Deleting success scenario 
+	 * Deleting success scenario
 	 */
-	
+
 	@Test
 	void deleteBookingTest_1() {
-		int id=1;
-		Booking book=mock(Booking.class);
+		int id = 1;
+		Booking book = mock(Booking.class);
 		Optional<Booking> optional = Optional.of(book);
 		Mockito.when(repo.findById(id)).thenReturn(optional);
-		//Mockito.when(repo.delete(book)).thenReturn(Optional.empty());
+		// Mockito.when(repo.delete(book)).thenReturn(Optional.empty());
 		doNothing().when(service).validateId(id);
 		doNothing().when(repo).delete(book);
-		Booking result=service.cancelBooking(id);
+		Booking result = service.cancelBooking(id);
 		Assertions.assertNotNull(optional);
-		Assertions.assertEquals(book,result);
+		Assertions.assertEquals(book, result);
 		verify(repo).delete(result);
 	}
-	
-	
+
 	/**
 	 * Scenario id not found for deleting. Delete failed
 	 */
 	@Test
 	void deleteBookingTest_2() {
-		int id=1;
+		int id = 1;
 		Optional<Booking> optional = Optional.empty();
 		when(repo.findById(id)).thenReturn(optional);
 		Executable executable = () -> service.viewBooking(id);
 		Assertions.assertThrows(BookingNotFoundException.class, executable);
 	}
-	
-	
-	
+
 	/**
 	 * Scenario List of all bookings
 	 */
@@ -162,12 +187,10 @@ class BookingServiceImplUnitTest {
 	void viewAllBookings_Test_1() {
 		List<Booking> bookings = mock(List.class);
 		when(repo.findAll()).thenReturn(bookings);
-		List<Booking> result=repo.findAll();
+		List<Booking> result = repo.findAll();
 		Assertions.assertSame(bookings, result);
 		verify(repo).findAll();
-		
+
 	}
-	
-	
 
 }
