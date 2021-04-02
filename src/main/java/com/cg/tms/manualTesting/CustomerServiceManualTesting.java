@@ -45,12 +45,14 @@ public class CustomerServiceManualTesting {
     	 */
         Customer customer1 = new Customer();
         Customer customer2 = new Customer();
-        customer1.setCustomerName("Mohan");
+        customer1.setCustomerName("MSP");
         customer1.setAddress("kancheepuram");
+        customer1.setCustomerPassword("mspsd");
         customer1.setEmail("msp@gmail.com");
         customer1.setMobileNo("8754489885");
         customer2.setCustomerName("Navneeth");
         customer2.setAddress("chennai");
+        customer2.setCustomerPassword("navaa");
         customer2.setEmail("navneth@gmail.com");
         customer2.setMobileNo("8755448955");
         customer1 = customerService.addCustomer(customer1);
@@ -60,15 +62,10 @@ public class CustomerServiceManualTesting {
         /*
          * Updating the name and address of the Customer 1
          */
-        customer1.setCustomerName("MSP");
+        customer1.setCustomerName("Mohan");
         customer1.setAddress("Chennai");
         customer1 = customerService.updateCustomer(customer1);
         display(customer1);
-        
-        
-        Customer deletecustomer = customerService.deleteCustomer(customer2);
-		display(deletecustomer);
-        System.out.println("****************DELETED A CUSTOMER*************");
         /*
          * payment details  and ticket details are saved in the database
          * 
@@ -91,7 +88,7 @@ public class CustomerServiceManualTesting {
          */
 
         Package pack = new Package();
-        pack.setPackageId(8);
+        pack.setPackageId(4);
         pack.setPackageName("Local");
         pack.setPackageDescription("diverse and cultural");
         pack.setPackageType("Normal");
@@ -126,12 +123,6 @@ public class CustomerServiceManualTesting {
             System.out.println(j.getCustomerId());
         }
 			
-			/*List<Customer> list = new ArrayList<>();
-			list = service.viewCustomerList(null);
-			List<Customer> list2 = new ArrayList<>();
-			list2 = service.viewAllCustomers(1);
-			System.out.println(Arrays.toString(list.toArray()));
-			*/
     }
 
     public void display(Customer customer) {

@@ -22,8 +22,8 @@ public class TripBookingBoot {
 	public static void main(String args[]) {
 
 		ConfigurableApplicationContext context = SpringApplication.run(TripBookingBoot.class, args);
-		BookingServiceImplManualTesting book = context.getBean(BookingServiceImplManualTesting.class);
-		book.start();
+		//BookingServiceImplManualTesting book = context.getBean(BookingServiceImplManualTesting.class);
+		//book.start();
 		PackageImplManualTesting packageUI = context.getBean(PackageImplManualTesting.class);
 		packageUI.start();
 

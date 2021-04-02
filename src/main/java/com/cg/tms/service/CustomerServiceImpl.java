@@ -72,6 +72,10 @@ public class CustomerServiceImpl implements ICustomerService {
     @Override
     public Customer deleteCustomer(Customer customer) throws CustomerNotFoundException {
         validateCustomer(customer);
+        boolean exists = customerRepository.existsById(customer.getCustomerId());
+        if (!exists) {
+            throw new CustomerNotFoundException("This Customer is not found in Database");
+        }
         customerRepository.delete(customer);
         return customer;
     }
