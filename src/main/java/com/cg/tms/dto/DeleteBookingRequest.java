@@ -1,7 +1,9 @@
 package com.cg.tms.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class DeleteBookingRequest {
-	
+	@NotBlank
 	private int id;
 
 	public int getId() {

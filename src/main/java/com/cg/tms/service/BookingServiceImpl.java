@@ -4,20 +4,21 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import com.cg.tms.entities.Package;
-import com.cg.tms.entities.PaymentDetails;
-import com.cg.tms.entities.TicketDetails;
-import com.cg.tms.repository.IPackageRepository;
-import com.cg.tms.repository.IPaymentDetailsRepository;
-import com.cg.tms.repository.ITicketDetailsRepository;
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.tms.entities.Booking;
+import com.cg.tms.entities.PaymentDetails;
+import com.cg.tms.entities.TicketDetails;
 import com.cg.tms.exceptions.BookingNotFoundException;
 import com.cg.tms.exceptions.InvalidBookingException;
 import com.cg.tms.exceptions.InvalidIdException;
 import com.cg.tms.repository.IBookingRepository;
+import com.cg.tms.repository.IPackageRepository;
+import com.cg.tms.repository.IPaymentDetailsRepository;
+import com.cg.tms.repository.ITicketDetailsRepository;
 
 @Service
 public class BookingServiceImpl extends BaseService implements IBookingService {
@@ -34,44 +35,40 @@ public class BookingServiceImpl extends BaseService implements IBookingService {
 	@Autowired
 	private IPackageRepository packageRepository;
 
-
 	/**
-	 * scenario: to make a booking and save it in database
-	 * input : a Booking object and is validated is using validateBooking() method 
-	 * expectation : all values to be saved in the database
+	 * scenario: to make a booking and save it in database input : a Booking object
+	 * and is validated is using validateBooking() method expectation : all values
+	 * to be saved in the database
 	 */
+	@Transactional
 	@Override
 	public Booking makeBooking(Booking booking) {
 		validateBooking(booking);
 		booking.setBookingDate(currentDate());
 
-        String ticketId=generateId();
-        TicketDetails ticket=booking.getTicket();
-        ticket.setStatus("reserved");
-        ticket.setTicketId(ticketId);
+		String ticketId = generateId();
+		TicketDetails ticket = booking.getTicket();
+		ticket.setStatus("reserved");
+		ticket.setTicketId(ticketId);
 
-        ticket = ticketRepository.save(ticket);
-        booking.setTicket(ticket);
+		ticket = ticketRepository.save(ticket);
+		booking.setTicket(ticket);
 
-		PaymentDetails payment=booking.getPayment();
-		payment=paymentRepository.save(payment);
-        booking.setPayment(payment);
-      	return repo.save(booking);
+		PaymentDetails payment = booking.getPayment();
+		payment = paymentRepository.save(payment);
+		booking.setPayment(payment);
+		return repo.save(booking);
 	}
 
-
-
-
-	public LocalDate currentDate(){
+	public LocalDate currentDate() {
 		return LocalDate.now();
 	}
 
-
 	/**
-	 * scenario : cancel booking using booking id
-	 * input : booking id of the booking made
-	 * expectation : the booking is cancelled and deleted from the database
+	 * scenario : cancel booking using booking id input : booking id of the booking
+	 * made expectation : the booking is cancelled and deleted from the database
 	 */
+	@Transactional
 	@Override
 	public Booking cancelBooking(int bookingId) throws BookingNotFoundException {
 		validateId(bookingId);
@@ -83,12 +80,10 @@ public class BookingServiceImpl extends BaseService implements IBookingService {
 		repo.delete(fetched);
 		return fetched;
 	}
-	
-	
+
 	/**
-	 * scenario : to view the current booking made
-	 * input : booking id of the booking made
-	 * expectation : the values of the booking are retrieved from database
+	 * scenario : to view the current booking made input : booking id of the booking
+	 * made expectation : the values of the booking are retrieved from database
 	 */
 	@Override
 	public Booking viewBooking(int bookingId) throws BookingNotFoundException {
@@ -98,11 +93,10 @@ public class BookingServiceImpl extends BaseService implements IBookingService {
 		}
 		return optional.get();
 	}
-	
-	
+
 	/**
-	 * scenario : to view all the bookings
-	 * expectation : list of all bookings are fetched
+	 * scenario : to view all the bookings expectation : list of all bookings are
+	 * fetched
 	 */
 	@Override
 	public List<Booking> viewAllBookings() {
