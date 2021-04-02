@@ -4,25 +4,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.cg.tms.dto.CreateRouteRequest;
 import org.springframework.stereotype.Component;
 
 import com.cg.tms.dto.RouteDetails;
-import com.cg.tms.dto.BusDetails;
+import com.cg.tms.dto.toGetBusRequest;
 import com.cg.tms.entities.Bus;
 import com.cg.tms.entities.Route;
 
 @Component
 public class RouteUtil {
-
-	public Route toRouteEntity(CreateRouteRequest request){
-		Route route = new Route();
-		route.setRouteFrom(request.getRouteFrom());
-		route.setRouteTo(request.getRouteTo());
-		route.setPickupPoint(request.getPickupPoint());
-		route.setFare(request.getFare());
-        return route;
-	}
 
 	public RouteDetails toRouteDetails(Route route) {
 		RouteDetails details = new RouteDetails();
@@ -47,10 +37,10 @@ public class RouteUtil {
 
 	}
 
-	public List<BusDetails> getBusList(List<Bus> buses) {
-		List<BusDetails> busList = new ArrayList<>();
+	public List<toGetBusRequest> getBusList(List<Bus> buses) {
+		List<toGetBusRequest> busList = new ArrayList<>();
 		for (Bus bus : buses) {
-			BusDetails getBus = new BusDetails();
+			toGetBusRequest getBus = new toGetBusRequest();
 			getBus.setId(bus.getBusId());
 			getBus.setBusNumber(bus.getBusNumber());
 			getBus.setCapacity(bus.getCapacity());
