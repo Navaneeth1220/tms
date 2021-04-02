@@ -23,11 +23,6 @@ public class PackageServiceImpl implements IPackageService {
     @Autowired
     private IHotelRepository hotelRepository;
 
-    @Autowired
-    private ITicketDetailsRepository ticketDetailsRepository;
-
-    @Autowired
-    private IPaymentDetailsRepository paymentDetailsRepository;
 
     /*
      *
