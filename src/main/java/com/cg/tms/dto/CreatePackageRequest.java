@@ -4,6 +4,7 @@ import javax.validation.constraints.NotBlank;
 
 public class CreatePackageRequest {
 
+	private int packageId;
 	@NotBlank
 	private String packageName;
 	@NotBlank
@@ -12,6 +13,24 @@ public class CreatePackageRequest {
 	private String packageType;
 	@NotBlank
 	private double packageCost;
+
+	public int getPackageId() {
+		return packageId;
+	}
+
+	public void setPackageId(int packageId) {
+		this.packageId = packageId;
+	}
+
+	public int getHotelId() {
+		return hotelId;
+	}
+
+	public void setHotelId(int hotelId) {
+		this.hotelId = hotelId;
+	}
+
+	private int hotelId;
 	@NotBlank
 	private String hotelName;
 	@NotBlank
