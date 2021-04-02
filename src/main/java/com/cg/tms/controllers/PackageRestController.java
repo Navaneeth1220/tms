@@ -42,6 +42,7 @@ public class PackageRestController {
 
 	/**
 	 * method to view package fetched by the given packageId
+	 * 
 	 * @param packageId of the booking made
 	 * @return package details of the given packaged
 	 */
@@ -52,9 +53,10 @@ public class PackageRestController {
 		PackageDetails packageDetails = packageUtil.toDetailPackage(pack);
 		return packageDetails;
 	}
-	
+
 	/**
 	 * method to view details of all the packages made
+	 * 
 	 * @return details of all the packages made
 	 */
 
@@ -68,6 +70,7 @@ public class PackageRestController {
 
 	/**
 	 * method to make a new package
+	 * 
 	 * @param requestData
 	 * @return details of the new package made
 	 */
@@ -77,12 +80,14 @@ public class PackageRestController {
 
 		Package pack = new Package();
 		Hotel hotel = new Hotel();
+		hotel.setHotelId(requestData.getHotelId());
 		hotel.setHotelName(requestData.getHotelName());
 		hotel.setHotelDescription(requestData.getHotelDescription());
 		hotel.setHotelType(requestData.getHotelType());
 		hotel.setAddress(requestData.getAddress());
 		hotel.setRent(requestData.getRent());
 		hotel.setStatus(requestData.getHotelStatus());
+		pack.setPackageId(requestData.getPackageId());
 		pack.setPackageName(requestData.getPackageName());
 		pack.setPackageDescription(requestData.getPackageDescription());
 		pack.setPackageType(requestData.getPackageType());
@@ -95,6 +100,7 @@ public class PackageRestController {
 
 	/**
 	 * method to delete a existing package, delete is done by providing packageId
+	 * 
 	 * @param requestData
 	 */
 	@DeleteMapping("/delete")
