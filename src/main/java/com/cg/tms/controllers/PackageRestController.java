@@ -40,6 +40,11 @@ public class PackageRestController {
 	@Autowired
 	private PackageUtil packageUtil;
 
+	/**
+	 * method to view package fetched by the given packageId
+	 * @param packageId of the booking made
+	 * @return package details of the given packaged
+	 */
 	@GetMapping(value = "/byid/{id}")
 	public PackageDetails fetchPackage(@PathVariable("id") @Min(1) int packageId) {
 		LOG.debug("packageId in fetchpackage in PackageRestController " + packageId);
@@ -47,6 +52,11 @@ public class PackageRestController {
 		PackageDetails packageDetails = packageUtil.toDetailPackage(pack);
 		return packageDetails;
 	}
+	
+	/**
+	 * method to view details of all the packages made
+	 * @return details of all the packages made
+	 */
 
 	@GetMapping
 	public List<PackageDetails> allPackages() {
@@ -56,6 +66,11 @@ public class PackageRestController {
 		return packageDetails;
 	}
 
+	/**
+	 * method to make a new package
+	 * @param requestData
+	 * @return details of the new package made
+	 */
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/add")
 	public PackageDetails addPackage(@RequestBody @Valid CreatePackageRequest requestData) {
@@ -68,18 +83,20 @@ public class PackageRestController {
 		hotel.setAddress(requestData.getAddress());
 		hotel.setRent(requestData.getRent());
 		hotel.setStatus(requestData.getHotelStatus());
-
 		pack.setPackageName(requestData.getPackageName());
 		pack.setPackageDescription(requestData.getPackageDescription());
 		pack.setPackageType(requestData.getPackageType());
 		pack.setPackageCost(requestData.getPackageCost());
 		pack.setHotel(hotel);
-
 		Package added = packageService.addPackage(pack);
 		PackageDetails response = packageUtil.toDetailPackage(added);
 		return response;
 	}
 
+	/**
+	 * method to delete a existing package, delete is done by providing packageId
+	 * @param requestData
+	 */
 	@DeleteMapping("/delete")
 	public String deletePackage(@RequestBody @Valid DeletePackageRequest requestData) {
 
