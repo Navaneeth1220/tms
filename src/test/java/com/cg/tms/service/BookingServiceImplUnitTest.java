@@ -1,11 +1,6 @@
 package com.cg.tms.service;
 
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -31,7 +26,6 @@ import com.cg.tms.repository.IBookingRepository;
 import com.cg.tms.repository.IPaymentDetailsRepository;
 import com.cg.tms.repository.ITicketDetailsRepository;
 
-import sun.security.krb5.internal.Ticket;
 
 @ExtendWith(MockitoExtension.class)
 class BookingServiceImplUnitTest {
@@ -50,42 +44,44 @@ class BookingServiceImplUnitTest {
 	BookingServiceImpl service;
 
 	/**
-	 * Scenario Successful booking Testcase
+	 * Scenario : Successful booking Testcase
+	 * input: details of the booking 
+	 * expectation: all the values are saved in the database
 	 */
 	@Test
-	void testMake_1() {
+	void testMakeBooking_1() {
 		String ticketId="dads";
-		String status="reserved";
 		Booking book = mock(Booking.class);
 		book.setBookingDate(LocalDate.now());
 		doNothing().when(service).validateBooking(book);
-		when(service.generateId()).thenReturn(ticketId);
-		
-		TicketDetails ticket =book.getTicket();
-		ticket.setStatus(status);
-		ticket.setTicketId(ticketId);
+
+		TicketDetails ticket =mock(TicketDetails.class);
+		when(book.getTicket()).thenReturn(ticket);
+		doReturn(ticketId).when(service).generateId();
 		
 		when(ticketRepository.save(ticket)).thenReturn(ticket);
-		book.setTicket(ticket);
-		
-		
-		PaymentDetails payment = book.getPayment();
+
+		PaymentDetails payment = mock(PaymentDetails.class);
+		when(book.getPayment()).thenReturn(payment);
 		when(paymentRepository.save(payment)).thenReturn(payment);
-		book.setPayment(payment);
-		
+
 		when(repo.save(book)).thenReturn(book);
 		Booking result = service.makeBooking(book);
 		Assertions.assertNotNull(result);
 		Assertions.assertSame(result,book);
 		verify(repo).save(book);
+		verify(ticketRepository).save(ticket);
+		verify(paymentRepository).save(payment);
 		
 	}
 
 	/**
-	 * scenario id cannot be negative testcase
+	 * scenario : id cannot be negative testcase
+	 * input : negative id is given
+	 * expectation : InvalidBookingException is thrown 
 	 */
 	@Test
-	void testMake_2() {
+	void testMakeBooking_2() {
 		int userId = -1;
 		Booking book = mock(Booking.class);
 		book.setUserId(userId);
@@ -96,10 +92,12 @@ class BookingServiceImplUnitTest {
 	}
 
 	/**
-	 * scenario booking type cannot be null
+	 * scenario : booking type cannot be empty
+	 * input : an empty bookingType string is passed
+	 * expectation : InvalidBooking exception is thrown
 	 */
 	@Test
-	void testMake_3() {
+	void testMakeBooking_3() {
 		String bookingType = "";
 		Booking book = mock(Booking.class);
 		book.setBookingType(bookingType);
@@ -111,7 +109,9 @@ class BookingServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario booking title cannot be null
+	 * scenario : booking title cannot be empty
+	 * input : an empty bookingTitle string is passed
+	 * expectation : InvalidaBookingException is thrown
 	 */
 	@Test
 	void testMake_4() {
@@ -125,9 +125,13 @@ class BookingServiceImplUnitTest {
 
 	}
 
-	// Booking Found
+	/**
+	 * scenario : find booking using bookingId
+	 * input : bookingId of type integer is passed
+	 * expectation : details of the booking for the given id is displayed
+	 */
 	@Test
-	void testFind_1() {
+	void testFindBooking_1() {
 		int id = 1;
 		Booking book = mock(Booking.class);
 		Optional<Booking> optional = Optional.of(book);
@@ -138,10 +142,12 @@ class BookingServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario Booking is not found
+	 * Scenario : Booking is not found for given id
+	 * input : bookingId of type integer is passed
+	 * expectation : BookingNotFoundExpectation is thrown 
 	 */
 	@Test
-	void testFind_2() {
+	void testFindBooking_2() {
 		int id = 12;
 		Optional<Booking> optional = Optional.empty();
 		when(repo.findById(id)).thenReturn(optional);
@@ -150,7 +156,9 @@ class BookingServiceImplUnitTest {
 	}
 
 	/**
-	 * Deleting success scenario
+	 * scenario : Deleting a booking using booking id
+	 * input : bookingId of type integer is passed
+	 * expectation : the booking for given bookingId is deleted
 	 */
 
 	@Test
@@ -169,7 +177,9 @@ class BookingServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario id not found for deleting. Delete failed
+	 * Scenario : deleting a booking for given bookingId fails
+	 * input : a bookingId that does not exists in datbase
+	 * expectation : BookingNotFoundException is thrown
 	 */
 	@Test
 	void deleteBookingTest_2() {
@@ -181,7 +191,8 @@ class BookingServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario List of all bookings
+	 * Scenario : List of all bookings are displayed
+	 * expectation : list of all bookings made are displayed
 	 */
 	@Test
 	void viewAllBookings_Test_1() {
