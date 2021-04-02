@@ -70,7 +70,7 @@ public class CustomerRestController {
 	} 
 	/**
 	 * method to view customer fetched by the given package id
-	 * @param  packageId of the needed package
+	 * @param  id of the needed package
 	 * @return Customer details of the given packageId
 	 */
 	@GetMapping("/package/{id}")
@@ -81,7 +81,7 @@ public class CustomerRestController {
 	}
 	/**
 	 * method to view customer fetched by the given route id
-	 * @param  routeId of the needed Route
+	 * @param  id of the needed Route
 	 * @return Customer details of the given routeId
 	 */
 	@GetMapping("/route/{id}")
