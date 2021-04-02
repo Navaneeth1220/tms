@@ -32,9 +32,7 @@ public class BookingServiceImpl extends BaseService implements IBookingService {
 	@Autowired
 	private ITicketDetailsRepository ticketRepository;
 
-	@Autowired
-	private IPackageRepository packageRepository;
-
+	
 	/**
 	 * scenario: to make a booking and save it in database input : a Booking object
 	 * and is validated is using validateBooking() method expectation : all values
@@ -58,6 +56,7 @@ public class BookingServiceImpl extends BaseService implements IBookingService {
 		payment = paymentRepository.save(payment);
 		booking.setPayment(payment);
 		return repo.save(booking);
+		//return booking;
 	}
 
 	public LocalDate currentDate() {

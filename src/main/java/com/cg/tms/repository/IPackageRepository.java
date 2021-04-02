@@ -1,12 +1,8 @@
 package com.cg.tms.repository;
 
-import com.cg.tms.exceptions.*;
-import java.util.*;
-import com.cg.tms.entities.Package;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+
+import com.cg.tms.entities.Package;
 
 public interface IPackageRepository extends JpaRepository<Package, Integer> {
 

@@ -18,8 +18,7 @@ public class Customer {
     private String mobileNo;
     private String email;
 
-    @ManyToOne
-    private  Package pack;
+    
 
     public int getCustomerId() {
         return customerId;

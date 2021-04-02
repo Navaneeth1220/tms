@@ -88,7 +88,6 @@ public class CustomerServiceManualTesting {
          */
 
         Package pack = new Package();
-        pack.setPackageId(4);
         pack.setPackageName("Local");
         pack.setPackageDescription("diverse and cultural");
         pack.setPackageType("Normal");
