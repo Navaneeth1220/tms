@@ -27,18 +27,14 @@ public class TripBookingBoot {
 		book.start();
 		PackageImplManualTesting packageUI = context.getBean(PackageImplManualTesting.class);
 		packageUI.start();
-		FeedbackImplManualTesting feedbackUI=context.getBean(FeedbackImplManualTesting.class);
-		feedbackUI.start();
-
-		Log.debug("i am logged using debug level");
-		/*PackageUI packageUI = context.getBean(PackageUI.class);
-		packageUI.start();
-*/
 		CustomerServiceManualTesting customerserviceManualTesting =context.getBean(CustomerServiceManualTesting.class);
 		customerserviceManualTesting.start();
-	/*	Log.debug("i am logged using debug level");
+		FeedbackImplManualTesting feedbackUI=context.getBean(FeedbackImplManualTesting.class);
+		feedbackUI.start();
+		
+		Log.debug("i am logged using debug level");
 		Log.info("i am logged using info level");
 		Log.error("i am logged using error level");
-		*/
+		
 	}
 }

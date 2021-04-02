@@ -1,6 +1,5 @@
 
- package com.cg.tms.manualTesting;
- 
+package com.cg.tms.manualTesting;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -39,49 +38,50 @@ public class FeedbackImplManualTesting {
 			feed1.setSubmitDate(currentDate);
 			feed1.setRating(3);
 			feed1.setFeedback("Average,Needs Improvement");
-			
-		//	Customer customer=new Customer();
-	    //		feed1.setCustomer(customer);
-			
+
+			Customer customer = new Customer();
+			customer.setCustomerName("Navneeth");
+			service1.addCustomer(customer);
+			feed1.setCustomer(customer);
+
 			Feedback feeded1 = service.addFeedback(feed1);
 			display(feeded1);
-			
-			Feedback feed2=new Feedback();
+
+			Feedback feed2 = new Feedback();
 			feed2.setFeedback("FeedbackID");
-			
-			Feedback feeded2=service.findByFeedbackId(5);
+
+			Feedback feeded2 = service.findByFeedbackId(5);
 			display(feeded2);
 			System.out.println("Feedbackid is 5");
-			
-		
-		
-		//	Customer cust=service.findByCustomerId(feeded1.getCustomer().getCustomerId());
-		//	display(cust);
-		//	System.out.println("Customer is 2");
-			
-			
+
+			Feedback feeded3 = service.findByCustomerId(feeded1.getCustomer().getCustomerId());
+			display(feeded3);
+			System.out.println("Customer is 2");
+
 			System.out.println("Display all Feedbacks");
 			List<Feedback> feedbacks = service.viewAllFeedbacks();
 			displayAll(feedbacks);
 
 		} catch (FeedbackNotFoundException e) {
 			System.out.println("Feedback not found");
+
 		} catch (InvalidFeedbackException e) {
-			System.out.print("InvalidFeedback exception");
+			System.out.println(e.getMessage());
 
 		}
 
 	}
 
 	void display(Feedback feeded) {
-		System.out.println(feeded.getFeedbackId() + " " + feeded.getRating() + " "
-				+ feeded.getFeedback() + " " + feeded.getSubmitDate());
+		System.out.println(feeded.getFeedbackId() + " " + feeded.getRating() + " " + feeded.getFeedback() + " "
+				+ feeded.getSubmitDate());
 
 	}
-//	void display(Customer cust) {
-	//	System.out.println( " "+ cust.getCustomerId());
 
-//	}
+	void display(Customer cust) {
+		System.out.println(" " + cust.getCustomerId());
+
+	}
 
 	void displayAll(Collection<Feedback> feedbacks) {
 		for (Feedback feed : feedbacks) {
@@ -89,4 +89,3 @@ public class FeedbackImplManualTesting {
 		}
 	}
 }
-
