@@ -1,6 +1,9 @@
 package com.cg.tms.dto;
 
+import javax.validation.constraints.NotBlank;
+
 public class ReportDetails {
+	@NotBlank
 	private int reportId;
 
 	public int getReportId() {

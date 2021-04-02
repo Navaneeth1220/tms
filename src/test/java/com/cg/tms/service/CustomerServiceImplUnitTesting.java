@@ -70,7 +70,7 @@ public class CustomerServiceImplUnitTesting {
 
 		String CustomerName = "";
 		Executable executable = () -> customerService.validateCustomerName(CustomerName);
-		Assertions.assertThrows(InvalidCustomerException.class, executable);
+		Assertions.assertThrows(InvalidCustomerNameException.class, executable);
 
 	}
 
