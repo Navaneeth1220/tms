@@ -1,11 +1,13 @@
 package com.cg.tms.dto;
 
-import com.cg.tms.entities.Customer;
+import javax.validation.constraints.NotBlank;
 
 public class AddFeedbackRequest {
-
+    @NotBlank
 	private int  customerId;
+    @NotBlank
 	private String feedback;
+    @NotBlank
 	private int rating;
 
 	public int getCustomerId() {

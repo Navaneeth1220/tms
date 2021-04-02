@@ -75,7 +75,7 @@ class ReportUnitTest {
 	
 	
 
-	//Booking Found
+	//Report found
 	@Test
 	void testFind_1() throws ReportNotFoundException {
 		int id=1;
@@ -86,7 +86,7 @@ class ReportUnitTest {
 		Assertions.assertEquals(result, report);
 	}
 	
-	//Booking not found
+	//Report not found
 	@Test
 	void testFind_2() {
 		int id=3;		
@@ -128,7 +128,7 @@ class ReportUnitTest {
 		Executable executable = () -> service.viewReport(id);
 		Assertions.assertThrows(ReportNotFoundException.class, executable);
 	}
-	/*Scenario List of all bookings
+	/*Scenario List of all reports
 	 */
 	@Test
 	void viewAllReports_Test_1() {
