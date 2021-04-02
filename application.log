@@ -85,3 +85,85 @@
 2021-04-02 01:49:02.163  INFO 16564 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8282 (http) with context path ''
 2021-04-02 01:49:02.167  INFO 16564 --- [main] com.cg.tms.TripBookingBoot               : Started TripBookingBoot in 9.25 seconds (JVM running for 10.528)
 2021-04-02 07:54:46.508  WARN 16564 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5h6m48s903ms803µs300ns).
+2021-04-02 08:59:54.764  INFO 17164 --- [main] com.cg.tms.TripBookingBoot               : Starting TripBookingBoot on DESKTOP-1C6K56O with PID 17164 (E:\OnlineTripBook\tms\bin\main started by SHIVENDRA in E:\OnlineTripBook\tms)
+2021-04-02 08:59:54.780  INFO 17164 --- [main] com.cg.tms.TripBookingBoot               : No active profile set, falling back to default profiles: default
+2021-04-02 08:59:55.767  INFO 17164 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-04-02 08:59:55.933  INFO 17164 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 155ms. Found 11 JPA repository interfaces.
+2021-04-02 08:59:57.145  INFO 17164 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8282 (http)
+2021-04-02 08:59:57.158  INFO 17164 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-02 08:59:57.159  INFO 17164 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2021-04-02 08:59:57.657  INFO 17164 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-04-02 08:59:57.658  INFO 17164 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2804 ms
+2021-04-02 08:59:57.929  INFO 17164 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-02 08:59:58.186  INFO 17164 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.12.Final
+2021-04-02 08:59:58.340  INFO 17164 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-04-02 08:59:58.497  INFO 17164 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-02 08:59:58.992  INFO 17164 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-02 08:59:59.015  INFO 17164 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-04-02 09:00:02.186  INFO 17164 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-02 09:00:02.193  INFO 17164 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-02 09:00:03.306  WARN 17164 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-02 09:00:03.455  INFO 17164 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-02 09:00:03.738  INFO 17164 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-04-02 09:00:03.746  INFO 17164 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-04-02 09:00:03.748 ERROR 17164 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8282 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8282 or configure this application to listen on another port.
+
+2021-04-02 09:00:03.751  INFO 17164 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-04-02 09:00:03.754  INFO 17164 --- [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-04-02 09:00:03.756  INFO 17164 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-04-02 09:00:03.778  INFO 17164 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-04-02 09:01:21.852  INFO 11372 --- [main] com.cg.tms.TripBookingBoot               : Starting TripBookingBoot on DESKTOP-1C6K56O with PID 11372 (E:\OnlineTripBook\tms\bin\main started by SHIVENDRA in E:\OnlineTripBook\tms)
+2021-04-02 09:01:21.856  INFO 11372 --- [main] com.cg.tms.TripBookingBoot               : No active profile set, falling back to default profiles: default
+2021-04-02 09:01:22.835  INFO 11372 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-04-02 09:01:23.026  INFO 11372 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 178ms. Found 11 JPA repository interfaces.
+2021-04-02 09:01:23.928  INFO 11372 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8282 (http)
+2021-04-02 09:01:23.941  INFO 11372 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-02 09:01:23.941  INFO 11372 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2021-04-02 09:01:24.354  INFO 11372 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-04-02 09:01:24.354  INFO 11372 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2415 ms
+2021-04-02 09:01:24.548  INFO 11372 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-02 09:01:24.618  INFO 11372 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.12.Final
+2021-04-02 09:01:24.805  INFO 11372 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2021-04-02 09:01:24.918  INFO 11372 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-02 09:01:25.344  INFO 11372 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-02 09:01:25.360  INFO 11372 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL95Dialect
+2021-04-02 09:01:28.163  INFO 11372 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-02 09:01:28.170  INFO 11372 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-02 09:01:29.116  WARN 11372 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-02 09:01:29.273  INFO 11372 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-02 09:01:29.551  INFO 11372 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2021-04-02 09:01:29.558  INFO 11372 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2021-04-02 09:01:29.560 ERROR 11372 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8282 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8282 or configure this application to listen on another port.
+
+2021-04-02 09:01:29.562  INFO 11372 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-04-02 09:01:29.565  INFO 11372 --- [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-04-02 09:01:29.567  INFO 11372 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-04-02 09:01:29.578  INFO 11372 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
