@@ -24,6 +24,7 @@ public class CustomerUtil {
         customerDetails.setCustomerId(customer.getCustomerId());
         customerDetails.setCustomerName(customer.getCustomerName());
         customerDetails.setCustomerPassword(customer.getCustomerPassword());
+        customerDetails.setAddress(customer.getAddress());
         customerDetails.setEmail(customer.getEmail());
         customerDetails.setMobileNo(customer.getMobileNo());
 

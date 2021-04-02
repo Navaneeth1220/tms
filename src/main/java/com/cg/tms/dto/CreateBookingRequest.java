@@ -1,21 +1,30 @@
 package com.cg.tms.dto;
 
+import javax.validation.constraints.NotBlank;
 
 public class CreateBookingRequest {
-
+	
+	@NotBlank
 	private String bookingType;
+	@NotBlank
 	private String bookingTitle;
-
+	@NotBlank
 	private String description;
+	@NotBlank
 	private int userId;
+	@NotBlank
 	private int packageId;
-
+	@NotBlank
 	private String paymentMode;
+	@NotBlank
 	private String bankName;
+	@NotBlank
 	private long cardNo;
+	@NotBlank
 	private double netAmount;
+	@NotBlank
 	private String paymentStatus;
-
+	@NotBlank
 	private String routeId;
 
 	public String getPaymentMode() {

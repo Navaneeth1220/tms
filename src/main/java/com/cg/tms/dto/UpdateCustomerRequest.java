@@ -2,9 +2,7 @@ package com.cg.tms.dto;
 
 import javax.validation.constraints.NotBlank;
 
-public class FetchCustomerByPackageId {
-	@NotBlank
-	private int customerId;
+public class UpdateCustomerRequest {
 	@NotBlank
 	private String customerName;
 	@NotBlank
@@ -13,13 +11,15 @@ public class FetchCustomerByPackageId {
 	private String mobileNo;
 	@NotBlank
 	private String email;
+	@NotBlank
+	private String customerPassword;
 
-	public int getCustomerId() {
-		return customerId;
+	public String getCustomerPassword() {
+		return customerPassword;
 	}
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setCustomerPassword(String customerPassword) {
+		this.customerPassword = customerPassword;
 	}
 
 	public String getCustomerName() {

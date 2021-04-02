@@ -47,11 +47,17 @@ public class BookingUtil {
 
 	public BookingDetails toBookingDetails(Booking book) {
 		BookingDetails details = new BookingDetails();
+		Package pack = book.getPack();
 		details.setBookingId(book.getBookingId());
 		details.setBookingTitle(book.getBookingTitle());
 		details.setBookingType(book.getBookingType());
 		details.setDescription(book.getDescription());
 		details.setUserId(book.getUserId());
+		details.setPackageId(pack.getPackageId());
+		details.setPackageName(pack.getPackageName());
+		details.setPackageDescription(pack.getPackageDescription());
+		details.setPackageType(pack.getPackageType());
+		details.setCost(pack.getPackageCost());
 		return details;
 	}
 
