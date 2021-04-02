@@ -26,6 +26,14 @@ public class CustomerServiceImpl implements ICustomerService {
 
     @Autowired
     private IPackageRepository packageRepository;
+    
+    /*
+     * Adds a Customer to the database after validation
+     *
+     * @param customer is Customer
+     *
+     * @return saved Customer
+     */
 
     @Override
     public Customer addCustomer(Customer customer) {
@@ -33,7 +41,15 @@ public class CustomerServiceImpl implements ICustomerService {
         customerRepository.save(customer);
         return customer;
     }
+    /*
+     * Update  a Customer to the database after validation
+     *
+     * @param customer is Customer
+     *
+     * @return saved Customer
+     */
 
+    
     @Override
     public Customer updateCustomer(Customer customer) throws CustomerNotFoundException {
         validateCustomer(customer);
@@ -44,14 +60,30 @@ public class CustomerServiceImpl implements ICustomerService {
         customerRepository.save(customer);
         return customer;
     }
-
+    /*
+    *
+    * Deletes a Customer from the database after validation based on customer
+    *
+    * @param customer is Customer
+    *
+    * @return deleted Customer
+    *
+    */
     @Override
     public Customer deleteCustomer(Customer customer) throws CustomerNotFoundException {
         validateCustomer(customer);
         customerRepository.delete(customer);
         return customer;
     }
-
+    /*
+    *
+    * Searches a Customer from the database after validation based on custId
+    *
+    * @param custId is Customer Id
+    *
+    * @return searched Customer
+    *
+    */
 
     @Override
     public Customer viewCustomer(int custid) throws CustomerNotFoundException {
@@ -61,6 +93,16 @@ public class CustomerServiceImpl implements ICustomerService {
         }
         return optional.get();
     }
+
+    /*
+    *
+    * Searches the List of Customer from the database with same PackageId
+    * 
+    * @param packageId is Package Id
+    *
+    * @return searched List of Customers
+    *
+    */
 
     @Override
     public List<Customer> viewAllCustomers(int packageId) throws PackageNotFoundException {
@@ -74,6 +116,16 @@ public class CustomerServiceImpl implements ICustomerService {
         return customers;
     }
 
+    /*
+     *
+     * Searches List of Customer from the database with same RouteId
+     * 
+     * @param routeId is Route Id
+     *
+     * @return searched List of Customers
+     *
+     */
+
     @Override
     public List<Customer> viewCustomerList(String routeId) throws RouteNotFoundException {
         Optional<Route> optionalRoute = routeRepository.findById(routeId);
@@ -85,8 +137,16 @@ public class CustomerServiceImpl implements ICustomerService {
         List<Customer>customers=customerRepository.findAllById(ids);
         return customers;
     }
-
-
+ 
+    /*
+    *
+    * Validates a Customer
+    *
+    * @param customer is Customer
+    *
+    * @return void
+    *
+    */
     void validateCustomer(Customer customer) {
         if (customer == null) {
             throw new InvalidCustomerException("Customer can't be null or empty");
@@ -94,7 +154,15 @@ public class CustomerServiceImpl implements ICustomerService {
         validateCustomerAddress(customer.getAddress());
         validateCustomerName(customer.getCustomerName());
     }
-
+    /*
+    *
+    * Validates Customer Address in Customer
+    *
+    * @param address is a data member of Customer
+    *
+    * @return void
+    *
+    */
     void validateCustomerAddress(String address) {
         if (address == null || address.isEmpty() || address.trim().isEmpty()) {
 
@@ -102,6 +170,15 @@ public class CustomerServiceImpl implements ICustomerService {
         }
 
     }
+    /*
+    *
+    * Validates Customer Name in Customer
+    *
+    * @param customerName is a data member of Customer
+    *
+    * @return void
+    *
+    */
 
     void validateCustomerName(String customerName) {
         if (customerName == null || customerName.isEmpty() || customerName.trim().isEmpty()) {

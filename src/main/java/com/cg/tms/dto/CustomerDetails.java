@@ -1,8 +1,5 @@
 package com.cg.tms.dto;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
 import com.cg.tms.entities.Package;

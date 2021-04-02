@@ -138,6 +138,8 @@ public class CustomerServiceManualTesting {
         System.out.println("Customer_Id = " + customer.getCustomerId());
         System.out.println("Customer_Name = " + customer.getCustomerName());
         System.out.println("Customer_Address= " + customer.getAddress());
+        System.out.println("Customer_Email= " + customer.getEmail());
+        System.out.println("Customer_MobileNo= " + customer.getMobileNo());
 
     }
 
