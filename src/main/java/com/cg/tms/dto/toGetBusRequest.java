@@ -1,26 +1,16 @@
 package com.cg.tms.dto;
 
-public class BusDetails {
-
-	private int busId;
-	private String busType;
+public class toGetBusRequest {
+	private int id;
 	private String busNumber;
 	private int capacity;
 
-	public int getBusId() {
-		return busId;
+	public int getId() {
+		return id;
 	}
 
-	public void setBusId(int busId) {
-		this.busId = busId;
-	}
-
-	public String getBusType() {
-		return busType;
-	}
-
-	public void setBusType(String busType) {
-		this.busType = busType;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getBusNumber() {
@@ -38,4 +28,5 @@ public class BusDetails {
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
+
 }

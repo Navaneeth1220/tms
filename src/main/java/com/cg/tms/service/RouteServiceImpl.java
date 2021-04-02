@@ -23,9 +23,9 @@ public class RouteServiceImpl extends BaseService implements IRouteService {
 	@Transactional
 	@Override
 	public Route addRoute(Route route) {
-		validateRoute(route);
 		String generatedId=generateId();
 		route.setRouteId(generatedId);
+		validateRoute(route);
 		Route saved = repository.save(route);
 		return saved;
 	}
@@ -64,7 +64,7 @@ public class RouteServiceImpl extends BaseService implements IRouteService {
 		return optional.get();
 	}
 
-	@Transactional
+	
 	@Override
 	public Route searchRoute(String routeId) throws RouteNotFoundException {
 		validateRouteId(routeId);
@@ -76,7 +76,7 @@ public class RouteServiceImpl extends BaseService implements IRouteService {
 		return optional.get();
 	}
 
-	@Transactional
+	
 	@Override
 	public List<Route> viewRouteList() {
 		List<Route> routeList = repository.findAll();
