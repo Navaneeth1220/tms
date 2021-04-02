@@ -1,7 +1,7 @@
 package com.cg.tms.service;
 
 import static org.mockito.Mockito.*;
-
+import com.cg.tms.entities.*;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -23,30 +23,35 @@ public class PackageServiceImplUnitTest {
 	@Mock
 	IPackageRepository packageRepository;
 
+	@Mock
+	IHotelRepository hotelRepository;
+
 	@Spy
 	@InjectMocks
 	PackageServiceImpl packageService;
 
 	/**
-	 * Scenario 1a: Add Package: Success
-	 * Test Case: Add Package
+	 * Scenario 1a: Add Package: Success Test Case: Add Package
 	 */
 	@Test
 	public void testAdd_Package1() {
 
 		Package pack = mock(Package.class);
+		Hotel hotel = pack.getHotel();
 		Package saved = mock(Package.class);
+		when(hotelRepository.save(hotel)).thenReturn(hotel);
 		when(packageRepository.save(pack)).thenReturn(saved);
 		doNothing().when(packageService).validatePackage(pack);
 		Package result = packageService.addPackage(pack);
 		Assertions.assertSame(saved, result);
 		verify(packageService).validatePackage(pack);
 		verify(packageRepository).save(pack);
+		verify(hotelRepository).save(hotel);
 	}
 
 	/**
-	 * Scenario 1b: Add Package: Failure
-	 * Test Case: Throw InvalidPackageNameException for Empty Package Name
+	 * Scenario 1b: Add Package: Failure Test Case: Throw
+	 * InvalidPackageNameException for Empty Package Name
 	 */
 	@Test
 	public void testAdd_Package2() {
@@ -62,8 +67,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 2a: Package Id Validation: Success
-	 * Test Case: PackageId provided does not throw any exception  
+	 * Scenario 2a: Package Id Validation: Success Test Case: PackageId provided
+	 * does not throw any exception
 	 */
 	@Test
 	public void testValidatePackageId_1() {
@@ -74,8 +79,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 2b: Package Id Validation - Negative PackageId
-	 * Test Case: Package Id provided is negative which throws InvalidPackageIdException
+	 * Scenario 2b: Package Id Validation - Negative PackageId Test Case: Package Id
+	 * provided is negative which throws InvalidPackageIdException
 	 */
 	@Test
 	public void testValidatePackageId_2() {
@@ -86,8 +91,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 3a: Package Name Validation - Empty Input
-	 * Test Case: Package Name provided is empty which throws InvalidPackageNameException
+	 * Scenario 3a: Package Name Validation - Empty Input Test Case: Package Name
+	 * provided is empty which throws InvalidPackageNameException
 	 */
 	@Test
 	public void testValidatePackageName_1() {
@@ -99,8 +104,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 3b: Package Name Validation - Null Input
-	 * Test Case: Package Name provided is null which throws InvalidPackageNameException
+	 * Scenario 3b: Package Name Validation - Null Input Test Case: Package Name
+	 * provided is null which throws InvalidPackageNameException
 	 */
 
 	@Test
@@ -113,8 +118,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 3c: Package Name Validation - Name Not Empty
-	 * Test Case: Package Name provided is valid which validates successfully
+	 * Scenario 3c: Package Name Validation - Name Not Empty Test Case: Package Name
+	 * provided is valid which validates successfully
 	 */
 	@Test
 	public void testValidatePackageName_3() {
@@ -124,8 +129,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 4a: Package Description Validation - Empty Input
-	 * Test Case:  Package Description provided is empty which throws InvalidPackageDescriptionException
+	 * Scenario 4a: Package Description Validation - Empty Input Test Case: Package
+	 * Description provided is empty which throws InvalidPackageDescriptionException
 	 */
 	@Test
 	public void testValidatePackageDescription_1() {
@@ -137,8 +142,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 4b: Package Description Validation - Null Input
-	 * Test Case:  Package Description provided is null which throws InvalidPackageDescriptionException
+	 * Scenario 4b: Package Description Validation - Null Input Test Case: Package
+	 * Description provided is null which throws InvalidPackageDescriptionException
 	 */
 	@Test
 	public void testValidatePackageDescription_2() {
@@ -151,8 +156,9 @@ public class PackageServiceImplUnitTest {
 
 	/**
 	 * Scenario 4c: Package Description Validation - Length Criteria Not
-	 * Satisfied(should be greater than 10)
-	 * Test Case:  Package Description provided has string length lesser than 10 which throws InvalidPackageDescriptionException
+	 * Satisfied(should be greater than 10) Test Case: Package Description provided
+	 * has string length lesser than 10 which throws
+	 * InvalidPackageDescriptionException
 	 * 
 	 */
 	@Test
@@ -165,8 +171,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 4d: Package Description Validation: Success
-	 * Test Case: Package Description provided is valid which validates successfully
+	 * Scenario 4d: Package Description Validation: Success Test Case: Package
+	 * Description provided is valid which validates successfully
 	 */
 	@Test
 	public void testValidatePackageDescription_4() {
@@ -177,8 +183,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 5a: PackageType Validation - Empty Input
-	 * Test Case: Package Type provided is empty which throws InvalidPackageTypeException
+	 * Scenario 5a: PackageType Validation - Empty Input Test Case: Package Type
+	 * provided is empty which throws InvalidPackageTypeException
 	 */
 	@Test
 	public void testValidatePackageType_1() {
@@ -190,8 +196,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 5b: PackageType Validation - Null Input
-	 * Test Case: Package Type provided is null which throws InvalidPackageTypeException
+	 * Scenario 5b: PackageType Validation - Null Input Test Case: Package Type
+	 * provided is null which throws InvalidPackageTypeException
 	 */
 	@Test
 	public void testValidatePackageType_2() {
@@ -204,8 +210,8 @@ public class PackageServiceImplUnitTest {
 
 	/**
 	 * Scenario 5c: PackageType Validation - Length Criteria Not Satisfied(should be
-	 * less than 10)
-	 * Test Case:  Package Type provided has string length greater than 10 which throws InvalidPackageTypeException
+	 * less than 10) Test Case: Package Type provided has string length greater than
+	 * 10 which throws InvalidPackageTypeException
 	 */
 	@Test
 	public void testValidatePackageType_3() {
@@ -217,8 +223,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 5d: PackageType Validation: Success
-	 * Test Case: Package Type provided is valid which validates successfully
+	 * Scenario 5d: PackageType Validation: Success Test Case: Package Type provided
+	 * is valid which validates successfully
 	 */
 	@Test
 	public void testValidatePackageType_4() {
@@ -229,8 +235,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 6a: Package found By packageId to Search: Success
-	 * Test Case: Package is searched based on package Id which exists
+	 * Scenario 6a: Package found By packageId to Search: Success Test Case: Package
+	 * is searched based on package Id which exists
 	 */
 	@Test
 	public void testSearchPackageById_1() {
@@ -245,8 +251,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 6b: Package not foundById to Search: Failure
-	 * Test Case:  Package is searched based on package Id which does not exist
+	 * Scenario 6b: Package not foundById to Search: Failure Test Case: Package is
+	 * searched based on package Id which does not exist
 	 */
 	@Test
 	public void testSearchPackageById_2() {
@@ -259,8 +265,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 7a: Package foundById to Delete: Success
-	 * Test Case: Package is deleted based on package Id which exists
+	 * Scenario 7a: Package foundById to Delete: Success Test Case: Package is
+	 * deleted based on package Id which exists
 	 */
 
 	@Test
@@ -276,8 +282,8 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 7b: Package not foundById to Delete: Failure
-	 * Test Case:  Package is deleted based on package Id which does not exist
+	 * Scenario 7b: Package not foundById to Delete: Failure Test Case: Package is
+	 * deleted based on package Id which does not exist
 	 */
 	@Test
 	public void testDeletePackageById_2() {
@@ -290,8 +296,7 @@ public class PackageServiceImplUnitTest {
 	}
 
 	/**
-	 * Scenario 8a: View All Packages:Success
-	 * Test Case: All packages are viewable
+	 * Scenario 8a: View All Packages:Success Test Case: All packages are viewable
 	 */
 	@Test
 	public void testViewAllPackages() {

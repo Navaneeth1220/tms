@@ -1,19 +1,22 @@
 package com.cg.tms.dto;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotBlank;
 
 import com.cg.tms.entities.Package;
 import com.cg.tms.entities.Route;
 
 public class CustomerDetails {
-
+	@NotBlank
 	private int customerId;
+	@NotBlank
 	private String customerName;
+	@NotBlank
 	private String customerPassword;
+	@NotBlank
 	private String address;
+	@NotBlank
 	private String mobileNo;
+	@NotBlank
 	private String email;
 
 	public int getCustomerId() {
