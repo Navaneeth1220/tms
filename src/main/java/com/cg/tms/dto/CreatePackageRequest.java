@@ -1,134 +1,69 @@
 package com.cg.tms.dto;
 
-import javax.validation.constraints.NotBlank;
+
+/**
+ * create hotel repository, hotel service
+ * end points (addHotel, fetching all Hotels )
+ * add hotel first => hotel id
+ * drop down => display all hotels in dropdown
+ * hotel => hotel id
+ */
 
 public class CreatePackageRequest {
 
-	private int packageId;
-	@NotBlank
-	private String packageName;
-	@NotBlank
-	private String packageDescription;
-	@NotBlank
-	private String packageType;
-	@NotBlank
-	private double packageCost;
 
-	public int getPackageId() {
-		return packageId;
-	}
+    private String packageName;
+    private String packageDescription;
+    private String packageType;
+    private double packageCost;
+    private int hotelId;
 
-	public void setPackageId(int packageId) {
-		this.packageId = packageId;
-	}
 
-	public int getHotelId() {
-		return hotelId;
-	}
+    public String getPackageName() {
+        return packageName;
+    }
 
-	public void setHotelId(int hotelId) {
-		this.hotelId = hotelId;
-	}
+    public void setPackageName(String packageName) {
 
-	private int hotelId;
-	@NotBlank
-	private String hotelName;
-	@NotBlank
-	private String hotelType;
-	@NotBlank
-	private String hotelDescription;
-	@NotBlank
-	private String address;
-	@NotBlank
-	private double rent;
-	@NotBlank
-	private String hotelStatus;
+        this.packageName = packageName;
+    }
 
-	public String getHotelName() {
-		return hotelName;
-	}
+    public String getPackageDescription() {
 
-	public void setHotelName(String hotelName) {
-		this.hotelName = hotelName;
-	}
+        return packageDescription;
+    }
 
-	public String getHotelType() {
-		return hotelType;
-	}
+    public void setPackageDescription(String packageDescription) {
 
-	public void setHotelType(String hotelType) {
-		this.hotelType = hotelType;
-	}
+        this.packageDescription = packageDescription;
+    }
 
-	public String getHotelDescription() {
-		return hotelDescription;
-	}
+    public String getPackageType() {
 
-	public void setHotelDescription(String hotelDescription) {
-		this.hotelDescription = hotelDescription;
-	}
+        return packageType;
+    }
 
-	public String getAddress() {
-		return address;
-	}
+    public void setPackageType(String packageType) {
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+        this.packageType = packageType;
+    }
 
-	public double getRent() {
-		return rent;
-	}
+    public double getPackageCost() {
 
-	public void setRent(double rent) {
-		this.rent = rent;
-	}
+        return packageCost;
+    }
 
-	public String getHotelStatus() {
-		return hotelStatus;
-	}
+    public void setPackageCost(double packageCost) {
 
-	public void setHotelStatus(String hotelStatus) {
-		this.hotelStatus = hotelStatus;
-	}
+        this.packageCost = packageCost;
+    }
 
-	public String getPackageName() {
-		return packageName;
-	}
 
-	public void setPackageName(String packageName) {
+    public int getHotelId() {
+        return hotelId;
+    }
 
-		this.packageName = packageName;
-	}
-
-	public String getPackageDescription() {
-
-		return packageDescription;
-	}
-
-	public void setPackageDescription(String packageDescription) {
-
-		this.packageDescription = packageDescription;
-	}
-
-	public String getPackageType() {
-
-		return packageType;
-	}
-
-	public void setPackageType(String packageType) {
-
-		this.packageType = packageType;
-	}
-
-	public double getPackageCost() {
-
-		return packageCost;
-	}
-
-	public void setPackageCost(double packageCost) {
-
-		this.packageCost = packageCost;
-	}
-
+    public void setHotelId(int hotelId) {
+        this.hotelId = hotelId;
+    }
 }

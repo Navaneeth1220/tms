@@ -1,10 +1,7 @@
 package com.cg.tms.entities;
 
 import java.util.Objects;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Package {
@@ -17,7 +14,7 @@ public class Package {
 	private String packageType;
 	private double packageCost;
 
-	@OneToOne
+	@ManyToOne
 	private Hotel hotel;
 
 	public Package() {

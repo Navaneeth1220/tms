@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
+import com.cg.tms.service.IHotelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,9 @@ public class PackageRestController {
 	private IPackageService packageService;
 
 	@Autowired
+	private IHotelService hotelService;
+
+	@Autowired
 	private PackageUtil packageUtil;
 
 	/**
@@ -62,7 +66,6 @@ public class PackageRestController {
 
 	@GetMapping
 	public List<PackageDetails> allPackages() {
-
 		List<Package> packs = packageService.viewAllPackages();
 		List<PackageDetails> packageDetails = packageUtil.toDetailsPackages(packs);
 		return packageDetails;
@@ -77,17 +80,8 @@ public class PackageRestController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/add")
 	public PackageDetails addPackage(@RequestBody @Valid CreatePackageRequest requestData) {
-
 		Package pack = new Package();
-		Hotel hotel = new Hotel();
-		hotel.setHotelId(requestData.getHotelId());
-		hotel.setHotelName(requestData.getHotelName());
-		hotel.setHotelDescription(requestData.getHotelDescription());
-		hotel.setHotelType(requestData.getHotelType());
-		hotel.setAddress(requestData.getAddress());
-		hotel.setRent(requestData.getRent());
-		hotel.setStatus(requestData.getHotelStatus());
-		pack.setPackageId(requestData.getPackageId());
+		Hotel hotel = 	hotelService.findById(requestData.getHotelId());
 		pack.setPackageName(requestData.getPackageName());
 		pack.setPackageDescription(requestData.getPackageDescription());
 		pack.setPackageType(requestData.getPackageType());

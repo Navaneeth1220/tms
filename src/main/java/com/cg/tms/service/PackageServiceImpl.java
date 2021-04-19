@@ -20,10 +20,7 @@ public class PackageServiceImpl implements IPackageService {
     @Autowired
     private IPackageRepository packageRepository;
 
-    @Autowired
-    private IHotelRepository hotelRepository;
-
-
+ 
     /*
      *
      * Adds a Package to the database after validation
@@ -35,10 +32,8 @@ public class PackageServiceImpl implements IPackageService {
      */
     @Override
     public Package addPackage(Package pack) {
+    	
         validatePackage(pack);
-        Hotel hotel = pack.getHotel();
-        hotel = hotelRepository.save(hotel);
-        pack.setHotel(hotel);
         Package saved = packageRepository.save(pack);
         return saved;
     }
@@ -89,6 +84,9 @@ public class PackageServiceImpl implements IPackageService {
      * @return List of all Packages
      *
      */
+    //packageList.stream().collect(Collectors.groupingBy(Collections.sort(),Package::getPrice()));
+    // Collection c = new ArrayList<>()
+    // 
     @Override
     public List<Package> viewAllPackages() {
         List<Package> viewAllPackages = packageRepository.findAll();

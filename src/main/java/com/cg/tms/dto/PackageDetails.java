@@ -4,29 +4,17 @@ import javax.validation.constraints.NotBlank;
 
 public class PackageDetails {
 
-	@NotBlank
 	private int packageId;
-	@NotBlank
 	private String packageName;
-	@NotBlank
 	private String packageDescription;
-	@NotBlank
 	private String packageType;
-	@NotBlank
 	private double packageCost;
-	@NotBlank
 	private int hotelId;
-	@NotBlank
 	private String hotelName;
-	@NotBlank
 	private String hotelType;
-	@NotBlank
 	private String hotelDescription;
-	@NotBlank
 	private String address;
-	@NotBlank
 	private double rent;
-	@NotBlank
 	private String hotelStatus;
 
 	public int getPackageId() {
