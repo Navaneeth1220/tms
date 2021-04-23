@@ -7,6 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import com.cg.tms.manualTesting.BookingServiceImplManualTesting;
 import com.cg.tms.manualTesting.CustomerServiceManualTesting;
@@ -48,4 +52,18 @@ public class TripBookingBoot {
 		Log.error("i am logged using error level");
 		
 	}
+	
+	@Bean
+    public CorsFilter corsFilter(){
+        UrlBasedCorsConfigurationSource src=new UrlBasedCorsConfigurationSource();
+        CorsConfiguration configuration=new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedOrigin("http://localhost:3000");
+        configuration.addAllowedMethod("*");
+        src.registerCorsConfiguration("/**",configuration);
+        return new CorsFilter(src);
+    }
+	
+	
 }

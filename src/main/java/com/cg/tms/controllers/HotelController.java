@@ -23,7 +23,7 @@ public class HotelController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/add")
-    public HotelDetails addHotel(@RequestBody CreateHotelRequest request){
+    public HotelDetails addHotel(@RequestBody CreateHotelRequest requestData){
      	/*
 		 * Hotel hotel=hotelUtil.toHotel(requestData); HotelDetails
 		 * hotelDetails=hotelUtil.toHotelDetails(hotel); return hotelDetails;
