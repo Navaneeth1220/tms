@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.cg.tms.entities.*;
 import com.cg.tms.entities.Package;
+import com.cg.tms.repository.IHotelRepository;
 import com.cg.tms.repository.IRouteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,9 @@ public class BookingServiceImplManualTesting {
 	@Autowired
 	private IRouteRepository routeRepository;
 
+	@Autowired
+	private IHotelRepository hotelRepository;
+
 	public void start() {
 		try {
 			
@@ -38,7 +42,6 @@ public class BookingServiceImplManualTesting {
 			pack1.setPackageCost(8500.0);
 			
 			Hotel hotel1 = new Hotel();
-			hotel1.setHotelId(177);
 			hotel1.setHotelName("Guhantara");
 			hotel1.setHotelDescription("Authentic and relaxing");
 			hotel1.setHotelType("Three star");
@@ -46,6 +49,7 @@ public class BookingServiceImplManualTesting {
 					"Sy. No. 177 & 177/18, Nowkal Palya, Kaggalipura, Off Kanakapura Main Road, South, Taluk, Bengaluru, Karnataka 560082");
 			hotel1.setRent(4720.0);
 			hotel1.setStatus("Good");
+			 hotelRepository.save(hotel1);
 			pack1.setHotel(hotel1);
 
 
@@ -73,7 +77,10 @@ public class BookingServiceImplManualTesting {
 			Booking booked=service.makeBooking(book1);
 			System.out.println("Booking made");
 			display(booked);
-
+			
+			List<Booking> books = service.viewBookingByUserId(book1.getUserId());
+			System.out.println("Booking by user ID");
+			displayAll(books);
 
 			TicketDetails ticket2 = new TicketDetails();
 			ticket2.setTicketId("8771254");

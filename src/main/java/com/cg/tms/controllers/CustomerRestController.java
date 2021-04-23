@@ -39,7 +39,7 @@ public class CustomerRestController {
 	
 	/**
 	 * method to view customer fetched by the given id
-	 * @param id of the Customer
+	 * @param customerId of the Customer
 	 * @return customer details of the given id
 	 */
 
@@ -47,7 +47,7 @@ public class CustomerRestController {
 	@GetMapping(value = "/byid/{id}")
 	public CustomerDetails fetchCustomer(@PathVariable("id") @Min(1)int customerId) {
 		Customer customer = customerService.viewCustomer(customerId);
-		CustomerDetails customerDetails = customerUtil.toDetailCustomer(customer);
+		CustomerDetails customerDetails = customerUtil.toCustomerDetail(customer);
 		return customerDetails;
 	}
 	/**
@@ -56,7 +56,7 @@ public class CustomerRestController {
 	 * @return details of the new Customer created
 	 */
 	@ResponseStatus(HttpStatus.CREATED)
-	@PostMapping("/addcustomer")
+	@PostMapping("/add")
 	public CustomerDetails addCustomer(@RequestBody @Valid CreateCustomerRequest requestData) {
 		Customer customer = new Customer();
 		customer.setCustomerName(requestData.getCustomerName());
@@ -65,29 +65,27 @@ public class CustomerRestController {
 		customer.setMobileNo(requestData.getMobileNo());
 		customer.setEmail(requestData.getEmail());
 		Customer added = customerService.addCustomer(customer);
-		CustomerDetails customerDetails = customerUtil.toDetailCustomer(added);
+		CustomerDetails customerDetails = customerUtil.toCustomerDetail(added);
 		return customerDetails;
 	} 
 	/**
 	 * method to view customer fetched by the given package id
-	 * @param  id of the needed package
 	 * @return Customer details of the given packageId
 	 */
 	@GetMapping("/package/{id}")
-	public List<FetchCustomerByPackageId> fetchCustomerByPack(@PathVariable("id")@Min(1) int packageId){
+	public List<CustomerDetails> fetchCustomerByPack(@PathVariable("id")@Min(1) int packageId){
 		List<Customer> customers =customerService.viewAllCustomers(packageId);
-		List<FetchCustomerByPackageId> fetched = customerUtil.toCustomerDetails(customers);
-		return fetched;
+		List<CustomerDetails> response = customerUtil.toCustomerDetailList(customers);
+		return response;
 	}
 	/**
 	 * method to view customer fetched by the given route id
-	 * @param  id of the needed Route
 	 * @return Customer details of the given routeId
 	 */
 	@GetMapping("/route/{id}")
-	public List<FetchCustomerByPackageId> fetchCustomerByroute(@PathVariable("id")String routeId ){
+	public List<CustomerDetails> fetchCustomerByRoute(@PathVariable("id")String routeId ){
 		List<Customer> customers =customerService.viewCustomerList(routeId);
-		List<FetchCustomerByPackageId> fetched = customerUtil.toCustomerDetails(customers);
+		List<CustomerDetails> fetched = customerUtil.toCustomerDetailList(customers);
 		return fetched;
 	}
 
@@ -96,7 +94,7 @@ public class CustomerRestController {
 	 * @param cid is the customerId
 	 */
 
-	@DeleteMapping("/deletecustomer/{cid}")
+	@DeleteMapping("/delete/{cid}")
 	public String deleteCustomer(@RequestBody @Valid int cid) {
         Customer customer=customerService.viewCustomer(cid);
 		customerService.deleteCustomer(customer);
@@ -104,10 +102,10 @@ public class CustomerRestController {
 	}
 	/**
 	 * method to update  the customer details of the exsting Customer
-	 * @param cid is the customerId
+	 * @param requestData
 	 * @return
 	 */
-	@PutMapping("/updatecustomer/{cid}")
+	@PutMapping("/update/{cid}")
 	public CustomerDetails toUpdateCustomer(@RequestBody @Valid UpdateCustomerRequest requestData,@PathVariable("cid") @Min(1) int customerId) {
 		Customer customer = customerService.viewCustomer(customerId);
 		customer.setCustomerName(requestData.getCustomerName());
@@ -116,7 +114,7 @@ public class CustomerRestController {
 		customer.setEmail(requestData.getEmail());
 		customer.setMobileNo(requestData.getMobileNo());
 		Customer savedCustomer = customerService.updateCustomer(customer);
-		CustomerDetails details = customerUtil.toDetailCustomer(savedCustomer);
+		CustomerDetails details = customerUtil.toCustomerDetail(savedCustomer);
 		return details;
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
+import com.cg.tms.service.IBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,39 +30,44 @@ import com.cg.tms.util.ReportUtil;
 @RequestMapping("/reports")
 @RestController
 public class ReportRestController {
-	@Autowired
-	private IReportService service;
-	@Autowired
-	private ReportUtil util;
+    @Autowired
+    private IReportService reportService;
 
-	@PostMapping("/add")
-	public ReportDetails addReport(@RequestBody @Valid AddReport requestData) {
-		Report report = new Report();
-		report.setReportName(requestData.getReportName());
-		report.setReportType(requestData.getReportType());
-		Report added = service.addReport(report);
-		ReportDetails details = util.toReportDetail(added);
-		return details;
-	}
+    @Autowired
+    private IBookingService bookingService;
 
-	@GetMapping("/byid/{id}")
-	public ReportDetails viewReport(@PathVariable("id") @Min(1) int id) {
-		Report report = service.viewReport(id);
-		ReportDetails fetched = util.toReportDetail(report);
-		return fetched;
-	}
 
-	@GetMapping
-	public List<ReportDetails> allReport() {
-		List<Report> viewing = service.viewAllReports();
-		List<ReportDetails> view = util.toReportDetail(viewing);
-		return view;
-	}
+    @Autowired
+    private ReportUtil util;
 
-	@DeleteMapping("/delete")
-	public void deleteReport(@RequestBody @Valid DeleteReport requestData) {
-		service.deleteReport(requestData.getReportId());
-		// return "Report delete for id "+requestData.getId();
-	}
+    @PostMapping("/add")
+    public ReportDetails createReport(@RequestBody @Valid AddReport requestData) {
+        Report report = new Report();
+        report.setReportName(requestData.getReportName());
+        Report added = reportService.addReport(report);
+        ReportDetails details = util.toReportDetail(added);
+        return details;
+    }
+
+
+    @GetMapping("/byid/{id}")
+    public ReportDetails viewReport(@PathVariable("id") @Min(1) int id) {
+        Report report = reportService.viewReport(id);
+        ReportDetails fetched = util.toReportDetail(report);
+        return fetched;
+    }
+
+    @GetMapping
+    public List<ReportDetails> allReport() {
+        List<Report> viewing = reportService.viewAllReports();
+        List<ReportDetails> view = util.toReportDetail(viewing);
+        return view;
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteReport(@RequestBody @Valid DeleteReport requestData) {
+        reportService.deleteReport(requestData.getReportId());
+        // return "Report delete for id "+requestData.getId();
+    }
 
 }

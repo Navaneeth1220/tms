@@ -14,6 +14,7 @@ public interface IBookingService{
 	public  Booking  cancelBooking(int bookingId) throws BookingNotFoundException;
 	public  Booking  viewBooking(int bookingId)throws BookingNotFoundException;
 	public List<Booking> viewAllBookings();
+	public List<Booking> viewBookingByUserId(int userId);
 	
 	
 	

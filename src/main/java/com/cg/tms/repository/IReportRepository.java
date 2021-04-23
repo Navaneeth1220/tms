@@ -4,14 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.cg.tms.entities.Report;
 
-public interface IReportRepository extends JpaRepository<Report,Integer>   {
+import java.time.LocalDate;
 
-	
-	
-	/*	public Report  addReport(Report report);
-		public Report  deleteReport(int reportId) throws ReportNotFoundException;
-		public Report  viewReport(int reportId) throws ReportNotFoundException;
-		public Report  viewAllReports();
-		*/
-	
+public interface IReportRepository extends JpaRepository<Report, Integer> {
+
+    Report findReportByReportDate(LocalDate date);
+
+    boolean existsByReportDate(LocalDate date);
 }

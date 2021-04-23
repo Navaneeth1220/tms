@@ -1,10 +1,19 @@
 package com.cg.tms.dto;
 
+import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
 
 public class ReportDetails {
 	@NotBlank
 	private int reportId;
+	private String reportType;
+	private String reportName;
+
+	private int bookingsCount;
+
+	// total earning on that day
+	private double earning;
 
 	public int getReportId() {
 		return reportId;
@@ -30,7 +39,19 @@ public class ReportDetails {
 		this.reportName = reportName;
 	}
 
-	private String reportType;
-	private String reportName;
+	public int getBookingsCount() {
+		return bookingsCount;
+	}
 
+	public void setBookingsCount(int bookingsCount) {
+		this.bookingsCount = bookingsCount;
+	}
+
+	public double getEarning() {
+		return earning;
+	}
+
+	public void setEarning(double earning) {
+		this.earning = earning;
+	}
 }

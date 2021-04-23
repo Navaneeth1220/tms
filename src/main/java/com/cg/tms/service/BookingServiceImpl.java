@@ -102,6 +102,12 @@ public class BookingServiceImpl extends BaseService implements IBookingService {
 		List<Booking> bookings = repo.findAll();
 		return bookings;
 	}
+	
+	@Override
+	public List<Booking> viewBookingByUserId(int userId){
+		List<Booking> bookings = repo.findByUserId(userId);
+		return bookings;
+	}
 
 	void validateBooking(Booking booking) {
 		validateId(booking.getBookingId());

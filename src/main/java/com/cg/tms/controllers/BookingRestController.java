@@ -97,4 +97,13 @@ public class BookingRestController {
 		BookedPackageDetails fetched = util.toPackageDetails(pack);
 		return fetched;
 	}
+	
+	@GetMapping("/byuserid/{id}")
+	public List<BookingDetails> fetchBookingByUserId(@PathVariable("id") @Min(1) int id){
+		List<Booking> bookings = service.viewBookingByUserId(id);
+		List<BookingDetails> fetched = util.toBookingDetails(bookings);
+		return fetched;
+	}
+	
+	
 }

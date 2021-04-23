@@ -27,6 +27,7 @@ public class TripBookingBoot {
 		BookingServiceImplManualTesting book = context.getBean(BookingServiceImplManualTesting.class);
 		book.start();
 		
+		
 		PackageImplManualTesting packageUI = context.getBean(PackageImplManualTesting.class);
 		packageUI.start();
 		

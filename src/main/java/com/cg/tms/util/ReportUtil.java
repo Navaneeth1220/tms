@@ -18,7 +18,8 @@ public class ReportUtil {
 		reportDetails.setReportId(report.getReportId());
 		reportDetails.setReportName(report.getReportName());
 		reportDetails.setReportType(report.getReportType());
-
+		reportDetails.setBookingsCount(report.getBookingsCount());
+       reportDetails.setEarning(report.getEarning());
 		return reportDetails;
 	}
 

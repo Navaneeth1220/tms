@@ -43,7 +43,6 @@ public class FeedbackRestController {
         feedback.setCustomer(customer);
         feedback.setFeedback(requestData.getFeedback());
         feedback.setRating(requestData.getRating());
-
         Feedback added = feedbackService.addFeedback(feedback);
         FeedbackDetails details = util.toFeedbackDetail(added);
         return details;
