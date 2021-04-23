@@ -81,7 +81,7 @@ public class PackageRestController {
 	@PostMapping("/add")
 	public PackageDetails addPackage(@RequestBody @Valid CreatePackageRequest requestData) {
 		Package pack = new Package();
-		Hotel hotel = 	hotelService.findById(requestData.getHotelId());
+		Hotel hotel = 	hotelService.findByHotelId(requestData.getHotelId());
 		pack.setPackageName(requestData.getPackageName());
 		pack.setPackageDescription(requestData.getPackageDescription());
 		pack.setPackageType(requestData.getPackageType());

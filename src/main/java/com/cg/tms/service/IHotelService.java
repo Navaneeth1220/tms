@@ -10,5 +10,5 @@ public interface IHotelService {
 
     List<Hotel>findAll();
 
-    Hotel findById(int hotelId);
+    Hotel findByHotelId(int hotelId);
 }

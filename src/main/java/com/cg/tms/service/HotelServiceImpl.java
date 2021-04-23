@@ -28,7 +28,7 @@ public class HotelServiceImpl  implements IHotelService{
     }
 
     @Override
-    public Hotel findById(int hotelId){
+    public Hotel findByHotelId(int hotelId){
     	
         Optional<Hotel> optional=hotelRepository.findById(hotelId);
         if(!optional.isPresent()){

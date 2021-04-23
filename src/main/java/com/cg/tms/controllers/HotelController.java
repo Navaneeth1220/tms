@@ -24,14 +24,25 @@ public class HotelController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/add")
     public HotelDetails addHotel(@RequestBody CreateHotelRequest request){
-        Hotel hotel=hotelUtil.toHotel(request);
-        HotelDetails hotelDetails=hotelUtil.toHotelDetails(hotel);
-        return hotelDetails;
+     	/*
+		 * Hotel hotel=hotelUtil.toHotel(requestData); HotelDetails
+		 * hotelDetails=hotelUtil.toHotelDetails(hotel); return hotelDetails;
+		 */
+		Hotel hotel = new Hotel();
+		hotel.setHotelName(requestData.getHotelName());
+		hotel.setHotelDescription(requestData.getHotelDescription());
+		hotel.setHotelType(requestData.getHotelType());
+		hotel.setAddress(requestData.getAddress());
+		hotel.setRent(requestData.getRent());
+		Hotel added = hotelService.addHotel(hotel);
+		HotelDetails response = hotelUtil.toHotelDetails(added);
+		return response;
+		
     }
 
     @GetMapping("/byid/{hotelId}")
     public HotelDetails getHotelById(@PathVariable("hotelId") int hotelId){
-        Hotel hotel=hotelService.findById(hotelId);
+        Hotel hotel=hotelService.findByHotelId(hotelId);
         HotelDetails hotelDetails=hotelUtil.toHotelDetails(hotel);
         return hotelDetails;
     }
