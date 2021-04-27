@@ -3,23 +3,14 @@ package com.cg.tms.dto;
 import javax.validation.constraints.NotBlank;
 
 public class CreateRouteRequest {
-	private String routeId;
 	@NotBlank
 	private String routeFrom;
 	@NotBlank
 	private String routeTo;
 	@NotBlank
 	private String pickupPoint;
-	@NotBlank
 	private double fare;
 
-	public String getRouteId() {
-		return routeId;
-	}
-
-	public void setRouteId(String routeId) {
-		this.routeId = routeId;
-	}
 
 	public String getRouteFrom() {
 		return routeFrom;

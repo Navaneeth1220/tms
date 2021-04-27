@@ -23,9 +23,9 @@ public class RouteServiceImpl extends BaseService implements IRouteService {
 	@Transactional
 	@Override
 	public Route addRoute(Route route) {
+		validateRoute(route);
 		String generatedId=generateId();
 		route.setRouteId(generatedId);
-		validateRoute(route);
 		Route saved = repository.save(route);
 		return saved;
 	}
@@ -84,7 +84,6 @@ public class RouteServiceImpl extends BaseService implements IRouteService {
 	}
 
 	void validateRoute(Route route) {
-		validateRouteId(route.getRouteId());
 		validateRouteFrom(route.getRouteFrom());
 		validateRouteTo(route.getRouteTo());
 		validateFare(route.getFare());

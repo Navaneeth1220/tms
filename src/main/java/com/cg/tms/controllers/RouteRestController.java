@@ -37,7 +37,6 @@ public class RouteRestController {
 	@PostMapping("/add")
 	public RouteDetails addRoute(@RequestBody @Valid CreateRouteRequest requestData) {
 		Route route = new Route();
-		route.setRouteId(requestData.getRouteId());
 		route.setRouteFrom(requestData.getRouteFrom());
 		route.setRouteTo(requestData.getRouteTo());
 		route.setPickupPoint(requestData.getPickupPoint());
